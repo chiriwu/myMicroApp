@@ -23,10 +23,6 @@ export default {
   computed: {
     menuItems() {
       const routes = this.$router.options.routes;
-      // console.log(
-      //   'routes=',
-      //   routes.filter((item) => console.log(item, item.meta)),
-      // );
       return routes.filter((item) => item.meta && item.meta.isNav).sort((a, b) => a.meta.number - b.meta.number);
     },
   },

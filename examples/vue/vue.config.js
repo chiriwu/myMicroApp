@@ -46,5 +46,13 @@ module.exports = {
       libraryTarget: 'umd',
       jsonpFunction: `webpackJsonp_${name}`,
     },
+    module: {
+      rules: [
+        {
+          test: /\.scss$/,
+          loaders: ['style-loader', 'css', 'sass-loader'],
+        },
+      ],
+    },
   },
 };

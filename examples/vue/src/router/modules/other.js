@@ -1,5 +1,6 @@
 import Login from '@/components/Login.vue';
-
+import Website from '@/views/display/website.vue';
+import Home from '@/views/Home.vue';
 export default [
   {
     path: '/login',
@@ -20,5 +21,17 @@ export default [
       number: 3,
       isNav: true,
     },
+  },
+  {
+    path: '/fruit',
+    name: 'fruit',
+    component: Home,
+    children: [
+      {
+        path: 'apple',
+        name: 'apple',
+        component: Website,
+      },
+    ],
   },
 ];
