@@ -1,21 +1,31 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Nav></Nav>
+    <router-view />
   </div>
 </template>
 
+<script>
+import Nav from '@/views/Nav.vue';
+
+export default {
+  data() {
+    return {
+      menuItems: ['Home', 'About', 'Services', 'Contact'],
+      activeItem: 0,
+    };
+  },
+  components: { Nav },
+  methods: {},
+};
+</script>
 <style>
 #app {
+  color: #2c3e50;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 #nav {
@@ -23,8 +33,8 @@
 }
 
 #nav a {
-  font-weight: bold;
   color: #2c3e50;
+  font-weight: bold;
   text-decoration: none;
 }
 
