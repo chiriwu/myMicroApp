@@ -47,12 +47,21 @@ module.exports = {
       jsonpFunction: `webpackJsonp_${name}`,
     },
     module: {
-      rules: [
-        {
-          test: /\.scss$/,
-          loaders: ['style-loader', 'css', 'sass-loader'],
-        },
-      ],
+      // rules: [
+      //   {
+      //     test: /\.scss$/,
+      //     use: [
+      //       'style-loader',
+      //       'css-loader',
+      //       {
+      //         loader: 'sass-loader',
+      //         options: {
+      //           indentedSyntax: true,
+      //         },
+      //       },
+      //     ],
+      //   },
+      // ],
     },
   },
 };
