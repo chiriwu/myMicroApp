@@ -49,6 +49,38 @@ module.exports = {
     module: {
       // rules: [
       //   {
+      //     test: /\.js$/,
+      //     loader: 'babel-loader',
+      //     exclude: function (modulePath) {
+      //       return (
+      //         (/node-modules/.test(modulePath) && !/node_modules\/monaco-editor/.test(modulePath)) ||
+      //         /core-js/.test(modulePath)
+      //       );
+      //     },
+      //     options: {
+      //       presets: ['@babel/preset-env'],
+      //       plugins: ['@babel/plugin-proposal-optional-chaining'],
+      //     },
+      //   },
+      // ],
+
+      rules: [
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [['@babel/preset-env', { targets: 'defaults' }]],
+            },
+          },
+        },
+      ],
+
+      //
+      // rules: [
+      //   {
+      // 为什么这里写这个会报错，但是我不安装下面的loader又用不了，又链接说是由于其他某个地方有定义
       //     test: /\.scss$/,
       //     use: [
       //       'style-loader',
