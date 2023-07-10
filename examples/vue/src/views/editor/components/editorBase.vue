@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 1000px">
+  <div style="height: 1000px; width: 100%">
     <div class="editor-container" ref="editorContainer"></div>
   </div>
 </template>
@@ -64,7 +64,8 @@ export default {
           theme: 'Tomorrow-Night-Bright',
         }));
         monacoInstance.onDidChangeModelContent((event) => {
-          const newValue = monacoInstance.getValue;
+          const newValue = monacoInstance.getValue();
+          console.log('i am here');
           this.$emit('input', newValue);
         });
       });
