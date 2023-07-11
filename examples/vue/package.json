@@ -7,14 +7,18 @@
     "start": "vue-cli-service serve"
   },
   "dependencies": {
+    "@antv/g6": "^4.8.19",
+    "@handsontable/vue": "^13.0.0",
     "element-ui": "^2.12.0",
+    "handsontable": "^13.0.0",
     "js-cookie": "^3.0.5",
     "monaco-editor": "^0.39.0",
     "monaco-editor-webpack-plugin": "^7.0.1",
     "monaco-themes": "^0.4.4",
     "vue": "^2.6.10",
     "vue-router": "^3.0.7",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
