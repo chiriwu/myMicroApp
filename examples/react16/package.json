@@ -2,17 +2,11 @@
   "name": "react16",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "antd": "^3.25.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2"
-  },
   "scripts": {
-    "start": "rescripts start",
     "build": "rescripts build",
-    "test": "rescripts test",
-    "eject": "rescripts eject"
+    "eject": "rescripts eject",
+    "start": "rescripts start",
+    "test": "rescripts test"
   },
   "browserslist": {
     "production": [
@@ -26,8 +20,16 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "antd": "^5.9.0",
+    "axios": "^1.5.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
+  },
   "devDependencies": {
     "@rescripts/cli": "^0.0.14",
     "react-scripts": "^3.4.1"
-  }
+  },
+  "proxy": "http://127.0.0.1:3000"
 }

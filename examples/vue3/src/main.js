@@ -6,6 +6,9 @@ import routes from './router';
 import store from './store';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
+import api from './utils/api.js';
+
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 
 let router = null;
 let instance = null;
@@ -20,9 +23,15 @@ function render(props = {}) {
   });
   console.log('routes=', router);
   instance = createApp(App);
+  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    instance.component(key, component);
+  }
   instance.use(router);
   instance.use(store);
   instance.use(ElementPlus);
+  instance.provide('global', {
+    api,
+  });
   instance.mount(container ? container.querySelector('#app') : '#app');
 }
 

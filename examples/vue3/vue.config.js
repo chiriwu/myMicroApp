@@ -22,6 +22,14 @@ module.exports = {
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
+    proxy: {
+      '/wish': {
+        // 这个是你要替换的位置
+        target: 'http://localhost:3000', //这个是被替换的目标地址
+        secure: true, //接受对方是https的接口
+        changeOrigin: true, // 是否需要跨域
+      },
+    },
   },
   // 自定义webpack配置
   configureWebpack: {

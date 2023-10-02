@@ -14,12 +14,15 @@
     </div>
     <div id="mountNode"></div>
     <div class="rightElement">
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="活动名称" v-for="key in showKey[curType]" :key="key">
-          <el-input placeholder="请输入内容"></el-input> {{ key }}
+      <div>
+        <span>当前类型：{{ curType }}</span>
+      </div>
+      <el-form ref="form" :model="form" :label-width="80" label-position="right" :inline="true">
+        <el-form-item prop="label" label="名称：" v-for="key in showKey[curType]" :key="key">
+          <!-- <span>{{ form[key] }}</span> -->
+          <el-input v-model="form[key]" placeholder="请输入内容"></el-input>
         </el-form-item>
       </el-form>
-      <el-button @click="test">anjian</el-button>
     </div>
   </div>
 </template>
@@ -32,7 +35,8 @@ export default {
       startdisX: 0,
       startdisY: 0,
       curItem: {},
-      curType: '',
+      curType: 'canvas',
+      curNodeType: '',
       form: {},
       formKey: {
         id: '',
@@ -54,8 +58,8 @@ export default {
         currentShape: '',
       },
       showKey: {
-        node: ['currentShape'],
-        edge: ['styles', 'keyShape'],
+        node: ['label'],
+        edge: ['styles', 'label'],
       },
       imgArr: [require('@/assets/circle-solid.svg'), require('@/assets/square-solid.svg')],
       number: 1, // 图形自增id
@@ -95,6 +99,24 @@ export default {
     // 渲染图
     this.graph.render();
   },
+  watch: {
+    form: {
+      handler(val) {
+        const model = {
+          id: this.curId,
+          type: this.curNodeType,
+          label: val.label,
+          style: {
+            fill: val.fill,
+          },
+        };
+        console.log('model=', model, this.curItem);
+        this.curItem.update(model);
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
   methods: {
     initG6() {
       this.graph = new G6.Graph({
@@ -103,7 +125,7 @@ export default {
         width: 800,
         height: 500,
         modes: {
-          default: ['drag-canvas', 'drag-node'],
+          default: ['drag-canvas', 'drag-node', 'click-add-edge'],
         },
       });
     },
@@ -111,6 +133,8 @@ export default {
       this.graph.on('click', (ev) => {
         const shape = ev.target;
         const item = ev.item;
+
+        console.log('graph click=', shape, shape);
         if (item) {
           const type = item.getType();
           console.log('type=', type);
@@ -119,17 +143,14 @@ export default {
       this.graph.on('canvas:click', (ev) => {
         const shape = ev.target;
         const item = ev.item;
+        this.curType = 'canvas';
+
         if (item) {
           const type = item.getType();
           console.log('type2=', type);
         }
       });
-      // this.graph.on('node:click', (ev) => {
-      //   const node = ev.item; // 被点击的节点元素
-      //   const shape = ev.target; // 被点击的图形，可根据该信息作出不同响应，以达到局部响应效果
-      //   console.log('this.is', node._cfg.id);
-      //   this.addRect();
-      // });
+
       // 点击节点
       this.graph.on('node:click', (e) => {
         console.log('hello this is node click');
@@ -142,6 +163,13 @@ export default {
         console.log('nodeItem=', nodeItem);
         this.curItem = nodeItem;
         this.curType = 'node';
+        this.curNodeType = nodeItem._cfg.model.type;
+        this.curId = nodeItem._cfg.id;
+        this.$set(this.form, 'label', nodeItem._cfg.model.label || '新建节点');
+
+        // this.form = {
+        //   label: nodeItem._cfg.model.label || '新建节点',
+        // };
         this.graph.setItemState(nodeItem, 'click', true); // 设置当前节点的 click 状态为 true
       });
 
@@ -156,6 +184,12 @@ export default {
         console.log('edgeItem=', edgeItem);
         this.curItem = edgeItem;
         this.curType = 'edge';
+        this.curNodeType = nodeItem._cfg.model.type;
+        this.curId = edgeItem._cfg.id;
+        this.$set(this.form, 'label', nodeItem._cfg.model.label || '新建边');
+        // this.form = {
+        //   label: nodeItem._cfg.model.label || '新建边',
+        // };
         this.graph.setItemState(edgeItem, 'click', true); // 设置当前边的 click 状态为 true
       });
     },
@@ -172,8 +206,10 @@ export default {
     dragStart(e) {
       let odiv = e.target; //获取目标元素
       //算出鼠标相对元素的位置
-      this.startDisx = e.clientX - odiv.offsetLeft;
-      this.startDisy = e.clientY - odiv.offsetTop;
+      // this.startDisx = e.clientX - odiv.offsetLeft;
+      // this.startDisy = e.clientY - odiv.offsetTop;
+      this.startDisx = e.clientX;
+      this.startDisy = e.clientY;
       console.log('disx,disy', this.startDisx, this.startDisy);
     },
     dragEnd(e) {
@@ -181,18 +217,6 @@ export default {
       let top = e.clientY - this.startDisy;
       console.log('good clientD', left, top);
       this.addRect(left, top);
-    },
-    test() {
-      const model = {
-        id: 'node1',
-        type: 'rect',
-        label: 'node',
-        style: {
-          fill: 'red',
-        },
-      };
-
-      this.curItem.update(model);
     },
   },
 };
@@ -211,8 +235,11 @@ export default {
 #mountNode {
   flex: 1;
 }
+#mountNode canvas {
+  border: 1px solid red;
+}
 .rightElement {
-  width: 200px;
+  width: 300px;
   border: 1px solid grey;
 }
 </style>

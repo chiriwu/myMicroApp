@@ -1,5 +1,6 @@
 const path = require('path');
 const { name } = require('./package');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 function resolve(dir) {
   return path.join(__dirname, dir);
@@ -46,6 +47,7 @@ module.exports = {
       libraryTarget: 'umd',
       jsonpFunction: `webpackJsonp_${name}`,
     },
+    plugins: [new MonacoWebpackPlugin()],
     module: {
       // rules: [
       //   {
@@ -65,6 +67,19 @@ module.exports = {
       // ],
 
       rules: [
+        // {
+        //   test: /\.scss$/,
+        //   use: [
+        //     'style-loader',
+        //     'css-loader',
+        //     {
+        //       loader: 'sass-loader',
+        //       options: {
+        //         indentedSyntax: true,
+        //       },
+        //     },
+        //   ],
+        // },
         {
           test: /\.m?js$/,
           exclude: /node_modules/,

@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { Divider } from 'antd';
 
-import 'antd/dist/antd.min.css';
+// import 'antd/dist/antd.min.css';
 import './App.css';
 
 import LibVersion from './components/LibVersion';
@@ -15,9 +15,7 @@ const RouteExample = () => {
   return (
     <Router basename={window.__POWERED_BY_QIANKUN__ ? '/react16' : '/'}>
       <nav>
-        <Link to="/">Home</Link>
-        <Divider type="vertical" />
-        <Link to="/about">About</Link>
+        <Link to="/about"> About </Link> <Link to="/"> Home </Link> <Divider type="vertical" />
       </nav>
       <Suspense fallback={null}>
         <Switch>
