@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 if (process.env.NODE_ENV === 'production') {
-  api.defaults.baseURL = 'http://prod.xxx.com';
+  api.defaults.baseURL = 'http://wjx666.top:3000';
 }
 // 请求拦截处理 请求拦截 在请求拦截中可以补充请求相关的配置
 // interceptors axios的拦截器对象

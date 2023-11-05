@@ -6,7 +6,7 @@ const routesModules = files.keys().reduce((acc, cur) => acc.concat(files(cur).de
 const routes = [
   {
     path: '/',
-    name: 'homePage',
+    // name: 'homePage',
     redirect: '/home',
   },
   ...routesModules,

@@ -13,7 +13,7 @@ const global = inject('global');
 
 function fetchData(id) {
   global
-    .api(`/wish/info?id=${id}`)
+    .api(`/api/wish/info?id=${id}`)
     .then(({ code, data, msg }) => {
       if (code !== 200) throw new Error(msg);
       console.log('data=', data);

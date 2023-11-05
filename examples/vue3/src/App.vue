@@ -1,12 +1,21 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/home">Home</router-link> |
+      <!-- <router-link to="/home">Home</router-link> |
       <router-link to="/detail">Detail</router-link>
+      hello -->
     </div>
     <router-view />
   </div>
 </template>
+
+<script setup>
+import { onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+onMounted(() => {
+  console.log('this.route=', useRouter(), useRoute());
+});
+</script>
 
 <style lang="less">
 #app {

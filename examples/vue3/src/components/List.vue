@@ -36,7 +36,7 @@ function jumpUrl(id) {
 
 function fetchData(page = 1) {
   global
-    .api(`/wish/list?category=${props.label}&page=${page}&rows=10`)
+    .api(`/api/wish/list?category=${props.label}&page=${page}&rows=10`)
     .then(({ code, data, msg }) => {
       if (code !== 200) throw new Error(msg);
       console.log('data=', data);
@@ -56,7 +56,7 @@ function handleCurrentChange(val) {
   console.log('VAL=', val);
 }
 </script>
-<style>
+<style lang="less">
 .container {
   display: flex;
   flex-direction: column;
@@ -69,7 +69,13 @@ function handleCurrentChange(val) {
   margin-bottom: 20px;
 }
 .cardItem {
-  flex: 0 0 33.3%;
+  // flex: 0 0 30%;
+  // width: 300px;
   margin-bottom: 10px;
+  padding: 5px;
+  background-color: lightgreen;
+  &:not(:first-child) {
+    margin-left: 20px;
+  }
 }
 </style>

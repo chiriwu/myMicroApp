@@ -11,6 +11,7 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   filenameHashing: true,
+  publicPath: '/v1/vue3/',
   devServer: {
     hot: true,
     disableHostCheck: true,
@@ -23,7 +24,7 @@ module.exports = {
       'Access-Control-Allow-Origin': '*',
     },
     proxy: {
-      '/wish': {
+      '/api/wish': {
         // 这个是你要替换的位置
         target: 'http://localhost:3000', //这个是被替换的目标地址
         secure: true, //接受对方是https的接口
