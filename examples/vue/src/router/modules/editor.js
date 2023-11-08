@@ -1,11 +1,12 @@
-import Editor from '@/views/editor';
+// import Editor from '@/views/editor';
 
 export default [
   {
     path: '/editor',
     name: 'editor',
-    component: Editor,
+    component: () => import('@/views/editor'),
     meta: {
+      title: '编辑器',
       number: 2,
       isNav: true,
     },

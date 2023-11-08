@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Nav></Nav>
+    <Nav v-if="!noNav"></Nav>
     <router-view />
   </div>
 </template>
@@ -14,6 +14,12 @@ export default {
       menuItems: ['Home', 'About', 'Services', 'Contact'],
       activeItem: 0,
     };
+  },
+  computed: {
+    noNav: function () {
+      console.log('computed', this, this?.$store.state, this?.$store.state.noNav);
+      return this?.$store.state.noNav;
+    },
   },
   components: { Nav },
   methods: {},

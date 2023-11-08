@@ -1,11 +1,8 @@
-import Login from '@/components/Login.vue';
-import Website from '@/views/display/website.vue';
-import Home from '@/views/Home.vue';
 export default [
   {
     path: '/login',
     name: 'login',
-    component: Login,
+    component: () => import('@/components/Login.vue'),
     meta: {
       isNav: false,
     },
@@ -18,6 +15,7 @@ export default [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/views/previewExcel'),
     meta: {
+      title: '图表',
       number: 3,
       isNav: true,
     },
@@ -30,6 +28,7 @@ export default [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/views/graph'),
     meta: {
+      title: '流程图',
       number: 4,
       isNav: true,
     },
@@ -45,17 +44,5 @@ export default [
       number: 5,
       isNav: true,
     },
-  },
-  {
-    path: '/fruit',
-    name: 'fruit',
-    component: Home,
-    children: [
-      {
-        path: 'apple',
-        name: 'apple',
-        component: Website,
-      },
-    ],
   },
 ];

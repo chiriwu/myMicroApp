@@ -19,6 +19,7 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   filenameHashing: true,
+  publicPath: '/v1/vue/',
   // tweak internal webpack configuration.
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
   devServer: {

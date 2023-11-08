@@ -1,15 +1,14 @@
-
 <template>
   <div class="login">
     <h2>用户登录</h2>
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
         <label for="username">用户名：</label>
-        <input type="text" id="username" v-model="username" required>
+        <input type="text" id="username" v-model="username" placeholder="admin" required />
       </div>
       <div class="form-group">
         <label for="password">密码：</label>
-        <input type="password" id="password" v-model="password" required>
+        <input type="password" id="password" v-model="password" placeholder="111" required />
       </div>
       <button type="submit">登录</button>
     </form>
@@ -21,25 +20,26 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
-    }
+      password: '',
+    };
   },
   methods: {
     async handleSubmit() {
-    await  this.$store.dispatch('setCookies');
-    this.$router.push({ path: '/home' })
+      await this.$store.dispatch('setCookies');
+      this.$router.push({ path: '/home' });
       // 处理登录逻辑
-      console.log('用户名：', this.username)
-      console.log('密码：', this.password)
-    }
-  }
-}
+      console.log('用户名：', this.username);
+      console.log('密码：', this.password);
+    },
+  },
+};
 </script>
 
 <style>
 .login {
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 100px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -47,8 +47,8 @@ export default {
 }
 
 h2 {
-  text-align: center;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .form-group {
@@ -58,31 +58,31 @@ h2 {
 label {
   display: inline-block;
   width: 80px;
-  text-align: right;
   margin-right: 10px;
+  text-align: right;
 }
 
-input[type="text"],
-input[type="password"] {
+input[type='text'],
+input[type='password'] {
   width: 200px;
   padding: 5px;
-  border-radius: 3px;
   border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
-button[type="submit"] {
+button[type='submit'] {
   display: block;
   width: 100%;
-  padding: 10px;
   margin-top: 20px;
-  background-color: #007bff;
+  padding: 10px;
   color: #fff;
+  background-color: #007bff;
   border: none;
   border-radius: 3px;
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
+button[type='submit']:hover {
   background-color: #0069d9;
 }
 </style>

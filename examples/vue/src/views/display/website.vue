@@ -20,12 +20,15 @@
 <script>
 import { WEBSITEARRAY } from './Enum.js';
 import websiteCard from './components/websiteCard';
-
 export default {
   data() {
     return {
       WEBSITEARRAY,
     };
+  },
+  created() {
+    const name = this.$routes;
+    console.log('route1=', this.$route);
   },
   components: {
     websiteCard,

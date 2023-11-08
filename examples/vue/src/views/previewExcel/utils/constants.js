@@ -1,4 +1,5 @@
 const data = [
+  ['Company name', 'Country', 'Name', 'Sell date', 'Order ID', 'In stock', 'Qty', 'Progress', 'Rating'],
   [false, 'Tagcat', 'United Kingdom', 'Classic Vest', '11/10/2020', '01-2331942', true, '172', 2, 2],
   [true, 'Zoomzone', 'Indonesia', 'Cycling Cap', '03/05/2020', '88-2768633', true, '188', 6, 2],
   [true, 'Meeveo', 'United States', 'Full-Finger Gloves', '27/03/2020', '51-6775945', true, '162', 1, 3],

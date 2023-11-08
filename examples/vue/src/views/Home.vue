@@ -1,35 +1,36 @@
 <template>
   <div style="display: flex; flex-direction: row; justify-content: left">
     <!-- 这个得弄个媒体查询，手机网页版的 -->
-    <div style="height: 100%; width: 200px">
+    <div style="height: 100vh; width: 200px">
       <el-menu
-        default-active="2"
+        :default-active="curActive"
         class="el-menu-vertical-demo"
-        style="height: 100%"
+        style="height: 100%; width: 200px"
         @open="handleOpen"
         @close="handleClose"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
       >
-        <el-submenu v-for="(item, index) in NavArr" :key="index" :index="index + ''">
+        <el-submenu v-for="(item, index) in NavArr" :key="index" :index="item.value">
           <template slot="title">
             <i :class="item.icon"></i>
             <span>{{ item.label }}</span>
           </template>
-
-          <el-menu-item
-            v-for="(v, i) in item.children"
-            :key="i"
-            :index="index + '-' + i"
-            @click="goPath(item.value, v.value)"
-          >
-            {{ v.label }}
-          </el-menu-item>
+          <div v-if="item.children.length">
+            <el-menu-item
+              v-for="(v, i) in item.children"
+              :key="i"
+              :index="item.value + i"
+              @click="goPath(item.value, v.value)"
+            >
+              {{ v.label }}
+            </el-menu-item>
+          </div>
         </el-submenu>
       </el-menu>
     </div>
-    <div style="margin-left: 200px; background-color: lightgrey; width: 100%">
+    <div style="background-color: lightgrey; width: 100%">
       <router-view></router-view>
     </div>
   </div>
@@ -40,6 +41,7 @@ export default {
   data() {
     return {
       NavArr,
+      curActive: NavArr[0].value,
     };
   },
   methods: {
@@ -50,10 +52,8 @@ export default {
       console.log(key, keyPath);
     },
     goPath(v1, v2) {
-      console.log('name=', `${v1}/${v2}`, this.$router);
-      // this.$router.push({ name: `${v1}/${v2}` });
-      // this.$router.push({ name: `${v2}` });
-      this.$router.push(`${v1}/${v2}`);
+      console.log('v=', v1, v2);
+      this.$router.push({ path: `/home/${v1}/${v2}` });
     },
   },
 };
