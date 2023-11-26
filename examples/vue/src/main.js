@@ -28,7 +28,7 @@ function render(props = {}) {
     routes,
   });
   router.beforeEach(async (to, from, next) => {
-    console.log('store=', store, store.state.token, to.name);
+    // console.log('store=', store, store.state.token, to.name);
     const token = store.commit('getToken');
 
     if (
@@ -36,13 +36,12 @@ function render(props = {}) {
       !store.state.token &&
       to.name !== 'login'
     ) {
-      console.log('hello');
       // 将用户重定向到登录页面
       next({ name: 'login' });
     } else {
-      console.log('noNavPages.includes(to.name)', noNavPages.includes(to.name));
+      // console.log('noNavPages.includes(to.name)', noNavPages.includes(to.name));
       store.commit('setNav', noNavPages.includes(to.name));
-      console.log('this.store.state.noNav=', store.state);
+      // console.log('this.store.state.noNav=', store.state);
       next();
     }
   });

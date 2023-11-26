@@ -1,18 +1,16 @@
 <template>
   <div>
-    <h1>网站信息</h1>
-    <div v-for="website in WEBSITEARRAY" :key="website.id">
-      <h2>{{ website.label }}</h2>
-      <el-row>
-        <el-col :span="8" v-for="(item, index) in website.children" :key="index">
-          <websiteCard
-            :name="item.label"
-            :src="item.url"
-            :imgUrl="item.imgUrl"
-            :description="item.description"
-          ></websiteCard>
-        </el-col>
-      </el-row>
+    <h1>{{ websites.label || '暂无数据' }}</h1>
+    <div style="padding: 12px; display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap">
+      <div style="margin-right: 36px" v-for="(item, index) in websites.children" :key="index">
+        <websiteCard
+          :title="item.title"
+          :src="item.link"
+          :imgUrl="item.imgUrl"
+          :description="item.description"
+          style="margin-top: 12px"
+        ></websiteCard>
+      </div>
     </div>
   </div>
 </template>
@@ -24,11 +22,25 @@ export default {
   data() {
     return {
       WEBSITEARRAY,
+      websites: {},
     };
   },
+  watch: {
+    $route(to, from) {
+      const name = to.path.split('/').at(-1);
+      this.updateData(name);
+    },
+  },
   created() {
-    const name = this.$routes;
-    console.log('route1=', this.$route);
+    if (this.$route?.path) {
+      const name = this.$route?.path.split('/').at(-1);
+      this.updateData(name);
+    }
+  },
+  methods: {
+    updateData(name) {
+      this.websites = WEBSITEARRAY[name] || {};
+    },
   },
   components: {
     websiteCard,

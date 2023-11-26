@@ -1,14 +1,17 @@
 <template>
-  <div id="example">
-    <!-- <el-button type="primary">上传</el-button> -->
-    <input
-      type="file"
-      id="newUpload"
-      @change="excelChange"
-      ref="file"
-      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    />
-    <el-button type="primary" @click="exportExcel">下载</el-button>
+  <div id="example" style="padding: 10px">
+    <div style="text-align: left; padding: 10px">
+      <el-button @click="uploadFile" type="primary">上传</el-button>
+      <input
+        hidden
+        type="file"
+        id="newUpload"
+        @change="excelChange"
+        ref="file"
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      />
+      <el-button type="primary" @click="exportExcel" style="margin-left: 10px">下载</el-button>
+    </div>
 
     <hot-table ref="hotTableComponent" :data="data" :settings="hotSettings"></hot-table>
   </div>
@@ -85,6 +88,9 @@ export default {
     HotTable,
   },
   methods: {
+    uploadFile() {
+      this.$refs.file.click();
+    },
     excelChange(e) {
       // https://www.npmjs.com/package/xlsx
       const file = e.currentTarget.files[0];
@@ -111,7 +117,7 @@ export default {
       console.log('nihao');
     },
     exportExcel() {
-      const excelData = this.$refs.hotTableComponent.data;
+      const excelData = this.$refs.hotTableComponent.hotInstance.getData();
       console.log('excelData', excelData);
       const ws_name = '表格1'; // sheet名
       const wb = utils.book_new(); // 创建对象

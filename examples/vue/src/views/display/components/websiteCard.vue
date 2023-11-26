@@ -1,11 +1,11 @@
 <template>
   <div class="card" @click="redirectToLink">
     <div class="card-image">
-      <img :src="imgUrl" width="200px" height="200px" style="object-fit: cover" alt="Card Cover" />
+      <img :src="imgUrl" width="64px" height="64px" style="object-fit: cover" alt="Card Cover" />
     </div>
     <div class="card-content">
-      <h3 class="card-title">{{ name }}</h3>
-      <p class="card-subtitle">{{ description }}</p>
+      <div class="card-title">{{ title }}</div>
+      <div class="card-subtitle">{{ description }}</div>
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     };
   },
   props: {
-    name: {
+    title: {
       type: String,
       default: '',
     },
@@ -61,12 +61,37 @@ export default {
 .card {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  width: 300px;
+  height: 84px;
+  padding: 10px;
+  background-color: rgba(0, 0, 180, 0.2);
+  border: 1px solid #eee;
+  border-radius: 10px;
   .card-image {
     object-fit: cover;
+  }
+  .card-title {
+    font-weight: 600;
+    // font-size: 20px;
   }
   .card-content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    // height: 64px;
+    margin-left: 12px;
+    overflow: hidden;
+    .card-subtitle {
+      width: 100%;
+      margin-top: 12px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: left;
+      text-overflow: ellipsis;
+    }
   }
 }
 </style>

@@ -8,8 +8,8 @@
         :src="item"
         v-for="(item, index) in imgArr"
         :key="index"
-        @dragstart="dragStart"
-        @dragend="dragEnd"
+        @dragstart="dragStart($event, index)"
+        @dragend="dragEnd($event, index)"
       />
     </div>
     <div id="mountNode"></div>
@@ -17,7 +17,9 @@
       <div>
         <span>当前类型：{{ curType }}</span>
       </div>
-      <el-form ref="form" :model="form" :label-width="80" label-position="right" :inline="true">
+      <el-form ref="form" :model="form" label-width="80" label-position="right" :inline="true">
+        <el-button @click="deleteItem">删除</el-button>
+
         <el-form-item prop="label" label="名称：" v-for="key in showKey[curType]" :key="key">
           <!-- <span>{{ form[key] }}</span> -->
           <el-input v-model="form[key]" placeholder="请输入内容"></el-input>
@@ -61,7 +63,10 @@ export default {
         node: ['label'],
         edge: ['styles', 'label'],
       },
-      imgArr: [require('@/assets/circle-solid.svg'), require('@/assets/square-solid.svg')],
+      imgArr: {
+        circle: require('@/assets/circle-solid.svg'),
+        rect: require('@/assets/square-solid.svg'),
+      },
       number: 1, // 图形自增id
       graph: null,
       graphData: {
@@ -119,13 +124,23 @@ export default {
   },
   methods: {
     initG6() {
+      const mountNodeEle = document.getElementById('mountNode');
+      const screenHeight = window.innerHeight;
       this.graph = new G6.Graph({
         container: 'mountNode', // 指定图画布的容器 id，与第 9 行的容器对应
         // 画布宽高
-        width: 800,
-        height: 500,
+        width: mountNodeEle.clientWidth,
+        height: screenHeight,
         modes: {
-          default: ['drag-canvas', 'drag-node', 'click-add-edge'],
+          default: [
+            'drag-canvas',
+            'drag-node',
+            'click-select',
+            {
+              type: 'create-edge',
+              trigger: 'click',
+            },
+          ],
         },
       });
     },
@@ -193,14 +208,14 @@ export default {
         this.graph.setItemState(edgeItem, 'click', true); // 设置当前边的 click 状态为 true
       });
     },
-    addRect(x, y) {
+    addShape(type, x, y) {
       this.graph.addItem('node', {
         x,
         y,
-        type: 'rect',
-        label: 'reactxe',
+        type,
+        label: '新建节点',
         // 在 G6 3.3 及之后的版本中，必须指定 name，可以是任意字符串，但需要在同一个自定义元素类型中保持唯一性
-        id: `rect-shape${this.number++}`,
+        id: `${type}-shape${this.number++}`,
       });
     },
     dragStart(e) {
@@ -212,12 +227,12 @@ export default {
       this.startDisy = e.clientY;
       console.log('disx,disy', this.startDisx, this.startDisy);
     },
-    dragEnd(e) {
-      let left = e.clientX - this.startDisx - 200;
-      let top = e.clientY - this.startDisy;
-      console.log('good clientD', left, top);
-      this.addRect(left, top);
+    dragEnd(e, id) {
+      let left = e.clientX - 200;
+      let top = e.clientY - 60;
+      this.addShape(id, left, top);
     },
+    deleteItem() {},
   },
 };
 </script>
@@ -234,6 +249,7 @@ export default {
 }
 #mountNode {
   flex: 1;
+  background-color: #eee;
 }
 #mountNode canvas {
   border: 1px solid red;

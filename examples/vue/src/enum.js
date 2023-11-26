@@ -1,117 +1,31 @@
 export const NavArr = [
   {
     label: '首页',
-    value: 'fruit0',
-    icon: 'el-icon-s-data',
-    children: [],
+    value: 'base',
+    icon: 'el-icon-s-home',
+    // children: [],
   },
   {
-    label: '水果',
+    label: '网站合集',
     value: 'website',
     icon: 'el-icon-s-data',
     children: [
       {
-        label: '苹果',
-        value: 'apple',
-        children: [
-          {
-            label: '红富士',
-            value: 'red_delicious',
-          },
-          {
-            label: '青苹果',
-            value: 'granny_smith',
-          },
-        ],
+        label: 'AI工具',
+        value: 'ai',
       },
+      { label: '生活服务', value: 'life' },
+      { label: 'AI人工智能', value: 'smart' },
+      { label: '日常生活', value: 'daily' },
+      { label: '娱乐生活', value: 'entertainment' },
+      { label: '兴趣爱好', value: 'hobbies' },
+      { label: '工具大全', value: 'tools' },
+      { label: '软件下载', value: 'software' },
+      { label: '发现资源', value: 'resource' },
+      { label: '探索发现', value: 'explore' },
       {
-        label: '香蕉',
-        value: 'banana',
-        children: [
-          {
-            label: '甜香蕉',
-            value: 'sweet_banana',
-          },
-          {
-            label: '青香蕉',
-            value: 'green_banana',
-          },
-        ],
-      },
-      {
-        label: '橙子',
-        value: 'base',
-        children: [
-          {
-            label: '橙子A',
-            value: 'orange_a',
-          },
-          {
-            label: '橙子B',
-            value: 'orange_b',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: '水果',
-    value: 'fruit2',
-    icon: 'el-icon-s-flag',
-    children: [
-      {
-        label: '热带水果',
-        value: 'tropical',
-        children: [
-          {
-            label: '香蕉',
-            value: 'banana',
-          },
-          {
-            label: '菠萝',
-            value: 'pineapple',
-          },
-          {
-            label: '芒果',
-            value: 'mango',
-          },
-        ],
-      },
-      {
-        label: '浆果',
-        value: 'berry',
-        children: [
-          {
-            label: '草莓',
-            value: 'strawberry',
-          },
-          {
-            label: '蓝莓',
-            value: 'blueberry',
-          },
-          {
-            label: '覆盆子',
-            value: 'raspberry',
-          },
-        ],
-      },
-      {
-        label: '柑橘类',
-        value: 'citrus',
-        children: [
-          {
-            label: '橙子',
-            value: 'orange',
-          },
-          {
-            label: '柠檬',
-            value: 'lemon',
-          },
-          {
-            label: '柚子',
-            value: 'grapefruit',
-          },
-        ],
+        label: '其他',
+        value: 'other',
       },
     ],
   },

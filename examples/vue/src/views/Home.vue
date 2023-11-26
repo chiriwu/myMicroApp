@@ -1,36 +1,44 @@
 <template>
-  <div style="display: flex; flex-direction: row; justify-content: left">
+  <div style="display: flex; flex-direction: row; justify-content: left; height: calc(100vh - 70px); overflow: hidden">
     <!-- 这个得弄个媒体查询，手机网页版的 -->
-    <div style="height: 100vh; width: 200px">
+    <div style="height: 100%; width: 200px; overflow: hidden">
       <el-menu
-        :default-active="curActive"
+        router
+        :default-active="$route.path"
         class="el-menu-vertical-demo"
         style="height: 100%; width: 200px"
         @open="handleOpen"
         @close="handleClose"
+        :default-openeds="openedArr"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
       >
-        <el-submenu v-for="(item, index) in NavArr" :key="index" :index="item.value">
-          <template slot="title">
+        <div v-for="(item, index) in NavArr" :key="index">
+          <el-submenu v-if="item.children && item.children.length" :index="item.value">
+            <template slot="title">
+              <i :class="item.icon"></i>
+              <span>{{ item.label }}</span>
+            </template>
+            <div>
+              <el-menu-item
+                v-for="(v, i) in item.children"
+                :key="i"
+                :index="'/home/' + item.value + '/' + v.value"
+                @click="goPath(item.value, v.value)"
+              >
+                {{ v.label }}
+              </el-menu-item>
+            </div>
+          </el-submenu>
+          <el-menu-item v-else :index="item.value" @click="goPath(item.value)">
             <i :class="item.icon"></i>
             <span>{{ item.label }}</span>
-          </template>
-          <div v-if="item.children.length">
-            <el-menu-item
-              v-for="(v, i) in item.children"
-              :key="i"
-              :index="item.value + i"
-              @click="goPath(item.value, v.value)"
-            >
-              {{ v.label }}
-            </el-menu-item>
-          </div>
-        </el-submenu>
+          </el-menu-item>
+        </div>
       </el-menu>
     </div>
-    <div style="background-color: lightgrey; width: 100%">
+    <div ref="website" style="background-color: lightgrey; width: calc(100% - 200px); overflow: scroll">
       <router-view></router-view>
     </div>
   </div>
@@ -42,18 +50,31 @@ export default {
     return {
       NavArr,
       curActive: NavArr[0].value,
+      openedArr: ['website'],
     };
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
+    },
+    scrollToTop() {
+      let currentPosition = this.$refs.website.scrollTop || document.body.scrollTop;
+      if (currentPosition > 0) {
+        window.requestAnimationFrame(this.scrollToTop);
+        this.$refs.website.scrollTo(0, currentPosition - currentPosition / 8); //需要设定在可滚动元素上
+      }
     },
     goPath(v1, v2) {
       console.log('v=', v1, v2);
-      this.$router.push({ path: `/home/${v1}/${v2}` });
+      const name = v2 ? `/home/${v1}/${v2}` : `/home/${v1}`;
+      // this.$router.push({ path: name });
+
+      this.$router.push({ path: name });
+      this.scrollToTop();
+      // this.$refs.website.scrollTo(0, 0); //需要设定在可滚动元素上
     },
   },
 };
