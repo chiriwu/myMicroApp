@@ -8,7 +8,7 @@
       </template>
     </el-image>
     <div class="title">
-      <span>{{ config.name }}</span>
+      {{ config.name }}
     </div>
     <div class="line"></div>
     <div class="labels">
@@ -43,15 +43,11 @@ function filterDate(d) {
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
 }
 .title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
   width: 300px;
-  height: 40px;
   overflow: hidden;
   color: rgba(0, 0, 0, 0.8);
   font-size: 14px;
+  line-height: 40px;
   white-space: nowrap;
   text-align: center;
   text-overflow: ellipsis;

@@ -67,15 +67,14 @@ function handleCurrentChange(val) {
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  margin-left: -20px;
 }
 .cardItem {
   // flex: 0 0 30%;
   // width: 300px;
   margin-bottom: 10px;
+  margin-left: 20px;
   padding: 5px;
   background-color: lightgreen;
-  &:not(:first-child) {
-    margin-left: 20px;
-  }
 }
 </style>

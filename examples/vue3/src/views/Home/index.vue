@@ -1,7 +1,6 @@
 <template>
   <el-tabs v-model="activeName" class="demo-tabs">
     <el-tab-pane v-for="item in navArr" :key="item.name" :label="item.label" :name="item.name">
-      <!-- config:{{ item.config }} -->
       <component :is="item.components" :label="item.label"></component>
     </el-tab-pane>
   </el-tabs>
@@ -13,9 +12,18 @@ import { navArr } from '../Enum';
 const activeName = ref('home');
 // const navArr = ref([]);
 </script>
-<style>
+<style lang="less">
+.el-tabs {
+  padding: 20px;
+  .el-tabs__header {
+    height: 48px;
+    color: #fff;
+    line-height: 48px;
+    background-color: #eee;
+  }
+}
+
 .demo-tabs > .el-tabs__content {
-  padding: 32px;
   color: #6b778c;
   font-weight: 600;
   font-size: 32px;
