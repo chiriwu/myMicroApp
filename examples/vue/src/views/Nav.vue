@@ -62,7 +62,6 @@ export default {
       this.selectItem(key);
     },
     selectItem(name) {
-      console.log('this.$router=', this.$router);
       // this.activeItem = index;
       // 处理导航项点击事件
       this.$router.push({ name });

@@ -1,4 +1,4 @@
-import 'zone.js'; // for angular subapp
+// import 'zone.js'; // for angular subapp
 import { initGlobalState, registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start } from '../../es';
 // import './index.less';
 /**

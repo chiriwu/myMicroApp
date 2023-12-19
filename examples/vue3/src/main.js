@@ -16,9 +16,9 @@ let history = null;
 
 function render(props = {}) {
   const { container } = props;
-  history = createWebHistory(window.__POWERED_BY_QIANKUN__ ? '/v1/vue3' : '/v1/vue3/');
+  history = createWebHistory(window.__POWERED_BY_QIANKUN__ ? '/vue3' : '/v1/vue3/');
   router = createRouter({
-    base: '/v1/vue3/',
+    base: window.__POWERED_BY_QIANKUN__ ? '/vue3' : '/v1/vue3/',
     history,
     routes,
   });
@@ -60,6 +60,7 @@ function storeTest(props) {
 }
 
 export async function mount(props) {
+  console.log('[vue3] window.__POWERED_BY_QIANKUN__=', window.__POWERED_BY_QIANKUN__);
   storeTest(props);
   render(props);
   instance.config.globalProperties.$onGlobalStateChange = props.onGlobalStateChange;

@@ -77,6 +77,7 @@ export async function bootstrap() {
 
 export async function mount(props) {
   console.log('[vue] props from main framework', props);
+  console.log('[vue] window.__POWERED_BY_QIANKUN__=', window.__POWERED_BY_QIANKUN__);
   storeTest(props);
   render(props);
 }

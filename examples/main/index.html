@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet/less" href="./index.less" />
-
     <title>不周山</title>
   </head>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js"></script>
@@ -23,7 +22,6 @@
           <li onclick="push('/vue3')">Vue3</li>
           <li onclick="push('/react16')">React16</li>
           <!-- <li onclick="push('/react15')">React15</li> -->
-
           <!-- <li onclick="push('/angular9')">Angular9</li> -->
           <li onclick="push('/purehtml')">Purehtml</li>
         </ul>
@@ -31,19 +29,7 @@
         <main id="subapp-container"></main>
       </div>
       <footer>
-        <div
-          style="
-            border-top: #ff8100 1px solid;
-            width: 100%;
-            float: left;
-            padding: 13px 0px;
-            font-size: 16px;
-            line-height: 18px;
-            color: #fff;
-            background: #ff8100;
-            text-align: center;
-          "
-        >
+        <div class="footer">
           <img src="./filings.png" width="16px" style="object-fit: contain; vertical-align: middle" alt="" />
           <a
             style="color: #fff; text-decoration: none"
@@ -65,6 +51,15 @@
       function push(subapp) {
         history.pushState(null, subapp, subapp);
       }
+    </script>
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?48a9109dca23c993be553ed9c99aa3c6';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
     </script>
   </body>
 </html>

@@ -68,7 +68,6 @@ export default {
       }
     },
     goPath(v1, v2) {
-      console.log('v=', v1, v2);
       const name = v2 ? `/home/${v1}/${v2}` : `/home/${v1}`;
       // this.$router.push({ path: name });
 
