@@ -1,17 +1,21 @@
 <template>
   <div class="container">
-    <el-image style="width: 300px; height: 425px; background-color: #eee" :src="props.config.imgUrl" fit="cover">
+    <el-image
+      style="width: 300px; height: 425px; background-color: #eee; cursor: pointer"
+      :src="props.config.imgUrl"
+      fit="cover"
+    >
       <template #error>
         <div class="image-slot">
           <icon-picture />
         </div>
       </template>
     </el-image>
-    <div class="title">
+    <div class="title" @click.stop="">
       {{ config.name }}
     </div>
-    <div class="line"></div>
-    <div class="labels">
+    <div class="line" @click.stop=""></div>
+    <div class="labels" @click.stop="">
       <div>
         <el-icon :size="18" color="#409EFC"><List /></el-icon>
         <span>{{ filterDate(config.createdAt) }}</span>

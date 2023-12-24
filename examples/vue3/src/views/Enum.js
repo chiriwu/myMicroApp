@@ -8,12 +8,12 @@ export const navArr = [
     components: ListCard,
     config: [],
   },
-  {
-    label: '电影',
-    name: 'movie',
-  },
-  {
-    label: '综艺',
-    name: 'show',
-  },
+  // {
+  //   label: '电影',
+  //   name: 'movie',
+  // },
+  // {
+  //   label: '综艺',
+  //   name: 'show',
+  // },
 ];

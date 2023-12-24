@@ -1,9 +1,11 @@
 <template>
-  <el-tabs v-model="activeName" class="demo-tabs">
-    <el-tab-pane v-for="item in navArr" :key="item.name" :label="item.label" :name="item.name">
-      <component :is="item.components" :label="item.label"></component>
-    </el-tab-pane>
-  </el-tabs>
+  <div class="navContainer">
+    <el-tabs v-model="activeName" class="demo-tabs">
+      <el-tab-pane v-for="item in navArr" :key="item.name" :label="item.label" :name="item.name">
+        <component :is="item.components" :label="item.label"></component>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 <script setup>
 import { ref } from 'vue';
@@ -19,13 +21,18 @@ const activeName = ref('home');
     height: 48px;
     color: #fff;
     line-height: 48px;
-    background-color: #eee;
+    background-color: Skyblue;
   }
 }
-
+.demo-tabs {
+  padding: 0 10px;
+}
 .demo-tabs > .el-tabs__content {
-  color: #6b778c;
+  color: Lightsteelblue;
   font-weight: 600;
   font-size: 32px;
+}
+.demo-tabs > .el-tabs__header {
+  padding: 0 20px;
 }
 </style>
