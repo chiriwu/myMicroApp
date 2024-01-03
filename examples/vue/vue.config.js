@@ -8,6 +8,8 @@ function resolve(dir) {
 
 const port = 7101; // dev port
 
+const _publicPath = '/v1/vue/';
+
 module.exports = {
   /**
    * You will need to set publicPath if you plan to deploy your site under a sub path,
@@ -19,7 +21,37 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   filenameHashing: true,
-  publicPath: '/v1/vue/',
+  publicPath: _publicPath,
+  chainWebpack: (config) => {
+    // 匹配相应的文件进行配置,解决element的静态文件在线上路径没有加上publicPath
+    config.module
+      .rule('images')
+      .use('url-loader')
+      .loader('url-loader')
+      .tap((options) => {
+        options['limit'] = 4096;
+        options['publicPath'] = _publicPath; // **重点：添加路径
+        return options;
+      });
+    config.module
+      .rule('media')
+      .use('url-loader')
+      .loader('url-loader')
+      .tap((options) => {
+        options['limit'] = 10000;
+        options['publicPath'] = _publicPath; // **重点：添加路径
+        return options;
+      });
+    config.module
+      .rule('fonts')
+      .use('url-loader')
+      .loader('url-loader')
+      .tap((options) => {
+        options['limit'] = 4096;
+        options['publicPath'] = _publicPath; // **重点：添加路径
+        return options;
+      });
+  },
   // tweak internal webpack configuration.
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
   devServer: {

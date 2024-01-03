@@ -1,17 +1,5 @@
 <template>
   <div>
-    <!-- <div class="navbar">
-      <ul class="nav-menu">
-        <li
-          v-for="(item, index) in menuItems"
-          :key="index"
-          @click="selectItem(item, index)"
-          :class="{ active: activeItem === index }"
-        >
-          {{ item.name }}
-        </li>
-      </ul>
-    </div> -->
     <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
@@ -24,21 +12,15 @@
       <el-menu-item v-for="(item, index) in menuItems" :key="index" :index="item.name">{{
         item.meta.title || item.name
       }}</el-menu-item>
-      <!-- <el-menu-item index="1">处理中心</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>消息中心</el-menu-item>
-      <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item> -->
+      <div style="position: absolute; float: right; right: 0; height: 60px; line-height: 60px; margin-right: 20px">
+        <el-button v-if="roleId === 0" @click="goLoginPage" type="text">登录</el-button>
+        <div v-else style="display: flex; flex-direction: row">
+          <span style="margin-right: 5px; color: greenyellow"><i class="el-icon-user"></i>开发者 </span>
+          <el-popconfirm title="确定退出吗" @confirm="exitLogin">
+            <el-button slot="reference" type="text">退出</el-button>
+          </el-popconfirm>
+        </div>
+      </div>
     </el-menu>
   </div>
 </template>
@@ -54,7 +36,13 @@ export default {
   computed: {
     menuItems() {
       const routes = this.$router.options.routes;
-      return routes.filter((item) => item.meta && item.meta.isNav).sort((a, b) => a.meta.number - b.meta.number);
+      const roleId = this.$store.state.roleId;
+      return routes
+        .filter((item) => item.meta && item.meta.roleId <= roleId && !item.meta.isLoginPage)
+        .sort((a, b) => a.meta.number - b.meta.number);
+    },
+    roleId() {
+      return this.$store.state.roleId;
     },
   },
   methods: {
@@ -65,6 +53,13 @@ export default {
       // this.activeItem = index;
       // 处理导航项点击事件
       this.$router.push({ name });
+    },
+    goLoginPage() {
+      this.$router.push({ path: '/login' });
+    },
+    async exitLogin() {
+      await this.$store.dispatch('clearCookies', 0); // 角色0
+      this.$router.push({ path: '/home' });
     },
   },
 };
@@ -83,5 +78,11 @@ ul.nav-menu li {
 
 ul.nav-menu li.active {
   font-weight: bold;
+}
+.el-menu-demo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 5px;
 }
 </style>

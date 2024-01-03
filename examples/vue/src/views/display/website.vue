@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>{{ websites.label || '暂无数据' }}</h1>
-    <div style="padding: 12px; display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap">
-      <div style="margin-right: 36px" v-for="(item, index) in websites.children" :key="index">
+    <div class="container">
+      <div class="websiteCardContainer" v-for="(item, index) in websites.children" :key="index">
         <websiteCard
           :title="item.title"
           :src="item.link"
@@ -47,3 +47,16 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: -36px;
+  padding: 12px;
+}
+.websiteCardContainer {
+  margin-left: 36px;
+}
+</style>

@@ -25,11 +25,12 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      await this.$store.dispatch('setCookies');
+      const roleId = 1; // 设置角色Id
+      await this.$store.dispatch('setCookies', roleId);
       this.$router.push({ path: '/home' });
       // 处理登录逻辑
-      console.log('用户名：', this.username);
-      console.log('密码：', this.password);
+      // console.log('用户名：', this.username);
+      // console.log('密码：', this.password);
     },
   },
 };

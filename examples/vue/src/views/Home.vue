@@ -1,7 +1,7 @@
 <template>
-  <div style="display: flex; flex-direction: row; justify-content: left; height: calc(100vh - 70px); overflow: hidden">
+  <div style="display: flex; flex-direction: row; justify-content: left; height: calc(100vh); overflow: hidden">
     <!-- 这个得弄个媒体查询，手机网页版的 -->
-    <div style="height: 100%; width: 200px; overflow: hidden">
+    <div class="navScroll">
       <el-menu
         router
         :default-active="$route.path"
@@ -38,7 +38,7 @@
         </div>
       </el-menu>
     </div>
-    <div ref="website" style="background-color: lightgrey; width: calc(100% - 200px); overflow: scroll">
+    <div ref="website" class="websiteContainer">
       <router-view></router-view>
     </div>
   </div>
@@ -78,3 +78,30 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.navScroll {
+  width: 200px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: lightgrey;
+  border-radius: 10px;
+}
+.navScroll::-webkit-scrollbar {
+  width: 3px;
+}
+.navScroll::-webkit-scrollbar-thumb {
+  background-color: lightcoral;
+}
+.websiteContainer {
+  width: calc(100% - 200px);
+  overflow: scroll;
+  background-color: lightgrey;
+}
+.websiteContainer::-webkit-scrollbar {
+  width: 10px;
+}
+.websiteContainer::-webkit-scrollbar-thumb {
+  background-color: lightsalmon;
+}
+</style>

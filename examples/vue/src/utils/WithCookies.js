@@ -11,9 +11,14 @@ export const getCookies = function () {
   return Cookies.get('token');
 };
 
+export const clearCookies = function () {
+  return Cookies.remove('token');
+};
+
 export default {
   setCookies,
   getCookies,
+  clearCookies,
 };
 
 // Create a cookie that expires 7 days from now, valid across the entire site:

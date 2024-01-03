@@ -8,7 +8,7 @@ export default [
     meta: {
       title: '编辑器',
       number: 2,
-      isNav: true,
+      roleId: 1,
     },
   },
 ];

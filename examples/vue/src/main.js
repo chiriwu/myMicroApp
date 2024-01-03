@@ -28,22 +28,24 @@ function render(props = {}) {
     routes,
   });
   router.beforeEach(async (to, from, next) => {
-    // console.log('store=', store, store.state.token, to.name);
-    const token = store.commit('getToken');
-
-    if (
-      // 检查用户是否已登录
-      !store.state.token &&
-      to.name !== 'login'
-    ) {
-      // 将用户重定向到登录页面
-      next({ name: 'login' });
-    } else {
-      // console.log('noNavPages.includes(to.name)', noNavPages.includes(to.name));
+    if (store.state.token && to.name === 'login') {
       store.commit('setNav', noNavPages.includes(to.name));
-      // console.log('this.store.state.noNav=', store.state);
+      next({ name: 'home' });
+    } else {
+      store.commit('setNav', noNavPages.includes(to.name));
       next();
     }
+
+    // 路由拦截
+    // if (
+    //   !store.state.token &&
+    //   to.name !== 'login'
+    // ) {
+    //   next({ name: 'login' });
+    // } else {
+    //   store.commit('setNav', noNavPages.includes(to.name));
+    //   next();
+    // }
   });
   instance = new Vue({
     router,

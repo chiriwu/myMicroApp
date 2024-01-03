@@ -1,8 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '@/views/Home.vue';
-import Base from '@/components/Base.vue';
-import Website from '@/views/display/website.vue';
 Vue.use(VueRouter);
 
 const files = require.context('@/router/modules', false, /\.js$/);
@@ -12,27 +9,29 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: () => import('@/views/Home.vue'),
+    redirect: '/home/base',
   },
   {
     path: '/home',
     name: 'home',
-    component: Home,
+    component: () => import('@/views/Home.vue'),
+    redirect: '/home/base',
     meta: {
       number: 1,
-      isNav: true,
+      roleId: 0,
       title: '首页',
     },
     children: [
       {
         path: 'base',
         name: 'base',
-        component: Base,
+        component: () => import('@/components/Base.vue'),
       },
       {
         path: 'website/:name',
         name: 'website',
-        component: Website,
+        component: () => import('@/views/display/website.vue'),
       },
     ],
   },

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { getCookies, setCookies } from '@/utils/WithCookies.js';
+import { getCookies, setCookies, clearCookies } from '@/utils/WithCookies.js';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -8,6 +8,7 @@ export default new Vuex.Store({
     isAuthorized: false,
     token: '',
     noNav: true,
+    roleId: 0,
   },
   mutations: {
     print: function (state) {
@@ -23,9 +24,15 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setCookies: ({ state }, name) => {
+    setCookies: ({ state }, roleId) => {
       setCookies();
       state.token = getCookies();
+      state.roleId = roleId;
+    },
+    clearCookies: ({ state }, roleId) => {
+      clearCookies();
+      state.token = getCookies();
+      state.roleId = roleId;
     },
   },
   modules: {},

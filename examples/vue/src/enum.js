@@ -30,3 +30,7 @@ export const NavArr = [
     ],
   },
 ];
+export const roleId = {
+  0: '访客',
+  1: '开发者',
+};
