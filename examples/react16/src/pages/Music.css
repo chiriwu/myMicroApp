@@ -1,0 +1,127 @@
+.liveContainer {
+  position: relative;
+  margin-top: 30px;
+  background-color: skyblue;
+}
+#left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  margin-left: 10%;
+}
+
+#mask {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+}
+
+#gc {
+  position: relative;
+  display: block;
+  height: calc(100% - 48px);
+  overflow-y: scroll;
+}
+
+#mse {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#album {
+  height: 55%;
+  background-image: url('//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/poster-big.jpeg');
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: 60%;
+}
+
+#info {
+  width: 53%;
+  padding-left: 5px;
+  color: white;
+  font-size: 18px;
+  line-height: 40px;
+}
+
+#info > div {
+  color: rgba(225, 225, 225, 0.8);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.xgplayer-lyric-item {
+  display: block;
+  color: rgba(225, 225, 225, 0.8) !important;
+  font-size: 12px !important;
+  line-height: 22px !important;
+  text-align: center;
+}
+
+.xgplayer-lyric-item-active {
+  color: rgb(49, 194, 124) !important;
+}
+
+#canvas {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3) 0,
+    rgba(255, 255, 255, 0.8) 70%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+}
+
+canvas {
+  width: 100%;
+}
+
+.xgplayer-lrcWrap {
+  height: 100% !important;
+  padding: 0 !important;
+  border: 0px solid #ddd !important;
+}
+
+.xgplayer-lrcForward {
+  left: 0px !important;
+}
+
+.xgplayer-lrcBack {
+  top: 75% !important;
+  left: 0px !important;
+}
+
+.select {
+  position: relative;
+  height: 30px;
+  margin: 50px 20px;
+  line-height: 30px;
+}
+
+.select select {
+  width: 100px;
+  height: 30px;
+  outline: none;
+}
+
+.opearte {
+  padding-top: 30px;
+  background-color: white;
+}
+.opearte::-webkit-scrollbar {
+  width: 3px;
+}
+.tipInfo {
+  padding: 10px;
+  color: #eee;
+  background-color: white;
+}

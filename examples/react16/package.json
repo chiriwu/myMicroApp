@@ -25,7 +25,11 @@
     "axios": "^1.5.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "xgplayer": "3.0.11",
+    "xgplayer-flv": "^3.0.11",
+    "xgplayer-hls": "^3.0.11",
+    "xgplayer-music": "^3.0.11"
   },
   "devDependencies": {
     "@rescripts/cli": "^0.0.14",
