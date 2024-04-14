@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet/less" href="./index.less" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet/less" href="/index.less" />
     <title>不周山</title>
   </head>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js"></script>
@@ -11,45 +12,64 @@
       <!-- 标题栏 -->
       <header class="mainapp-header">
         <div>
-          <img class="favicon" src="./favicon.png" alt="" />
+          <img class="favicon" src="/favicon.png" alt="" />
+        </div>
+        <div>
+          <ul class="mainapp-sidemenu">
+            <li onclick="push('/vue')">网站导航</li>
+            <li onclick="push('/vue3')">电影资源</li>
+            <li onclick="push('/react16')">管理后台</li>
+            <!-- <li onclick="push('/react15')">React15</li> -->
+            <!-- <li onclick="push('/angular9')">Angular9</li> -->
+            <li onclick="push('/purehtml')">概览页</li>
+          </ul>
+        </div>
+        <div class="phone-fold" onclick="showMenu()">
+          <!-- <img src="./icon.png">三</img> -->
+          <i class="menu-ico"></i>
         </div>
         <div class="desc">西北海之外，大荒之隅，有山而不合，名曰不周。</div>
       </header>
+      <ul id="second-level">
+        <li onclick="push('/vue')">网站导航</li>
+        <li onclick="push('/vue3')">电影资源</li>
+        <li onclick="push('/react16')">管理后台</li>
+        <li onclick="push('/purehtml')">概览页</li>
+      </ul>
       <div class="mainapp-main">
         <!-- 侧边栏 -->
-        <ul class="mainapp-sidemenu">
-          <li onclick="push('/vue')">Vue</li>
-          <li onclick="push('/vue3')">Vue3</li>
-          <li onclick="push('/react16')">React16</li>
-          <!-- <li onclick="push('/react15')">React15</li> -->
-          <!-- <li onclick="push('/angular9')">Angular9</li> -->
-          <li onclick="push('/purehtml')">Purehtml</li>
-        </ul>
+
         <!-- 子应用  -->
-        <main id="subapp-container"></main>
-      </div>
-      <footer>
-        <div class="footer">
-          <img src="./filings.png" width="16px" style="object-fit: contain; vertical-align: middle" alt="" />
-          <a
-            style="color: #fff; text-decoration: none"
-            href="https://beian.mps.gov.cn/#/query/webSearch?code=36100202000488"
-            rel="noreferrer"
-            target="_blank"
-            >赣公网安备36100202000488</a
-          >丨<a
-            href="https://beian.miit.gov.cn/#/Integrated/index"
-            style="color: #fff; text-decoration: none"
-            target="blank"
-            >赣ICP备20007113号-1</a
-          >
+        <div id="right-content">
+          <main id="subapp-container"></main>
         </div>
-      </footer>
+      </div>
+      <div class="footer">
+        <img src="/filings.png" width="16px" style="object-fit: contain; vertical-align: middle" alt="" />
+        <a
+          style="color: #fff; text-decoration: none"
+          href="https://beian.mps.gov.cn/#/query/webSearch?code=36100202000488"
+          rel="noreferrer"
+          target="_blank"
+          >赣公网安备36100202000488</a
+        >丨<a
+          href="https://beian.miit.gov.cn/#/Integrated/index"
+          style="color: #fff; text-decoration: none"
+          target="blank"
+          >赣ICP备20007113号-1</a
+        >
+      </div>
     </div>
 
     <script>
       function push(subapp) {
         history.pushState(null, subapp, subapp);
+      }
+
+      function showMenu() {
+        console.log(" document.getElementById('second-level')", document.getElementById('second-level'));
+
+        document.getElementById('second-level').style.display = 'block';
       }
     </script>
     <script>
