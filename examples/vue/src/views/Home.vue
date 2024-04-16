@@ -6,13 +6,13 @@
         router
         :default-active="$route.path"
         class="el-menu-vertical-demo"
-        style="height: 100%; width: 200px"
         @open="handleOpen"
         @close="handleClose"
         :default-openeds="openedArr"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
+        :collapse="isCollapse"
       >
         <div v-for="(item, index) in NavArr" :key="index">
           <el-submenu v-if="item.children && item.children.length" :index="item.value">
@@ -51,6 +51,7 @@ export default {
       NavArr,
       curActive: NavArr[0].value,
       openedArr: ['website'],
+      isCollapse: true,
     };
   },
   methods: {
@@ -80,7 +81,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .navScroll {
-  width: 200px;
+  // width: 200px;
   height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -103,5 +104,12 @@ export default {
 }
 .websiteContainer::-webkit-scrollbar-thumb {
   background-color: lightsalmon;
+}
+.el-menu-vertical-demo {
+  width: 150px;
+  height: 100%;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 100px;
 }
 </style>
