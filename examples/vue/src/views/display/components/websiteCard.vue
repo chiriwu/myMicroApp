@@ -65,7 +65,7 @@ export default {
   width: 300px;
   height: 84px;
   padding: 10px;
-  background-color: rgba(0, 0, 180, 0.2);
+  background-image: linear-gradient(180deg, #dae8fe, #fff 80%, #fff);
   border: 1px solid #eee;
   border-radius: 10px;
   .card-image {

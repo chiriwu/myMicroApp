@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header-container">
     <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
@@ -65,7 +65,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.header-container {
+}
 ul.nav-menu {
   display: flex;
   list-style-type: none;
@@ -83,6 +85,6 @@ ul.nav-menu li.active {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 </style>

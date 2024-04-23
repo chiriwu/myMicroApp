@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex; flex-direction: row; justify-content: left; height: calc(100vh); overflow: hidden">
+  <div class="content-container">
     <!-- 这个得弄个媒体查询，手机网页版的 -->
     <div class="navScroll">
       <el-menu
@@ -14,11 +14,11 @@
         active-text-color="#ffd04b"
         :collapse="isCollapse"
       >
-        <div v-for="(item, index) in NavArr" :key="index">
-          <el-submenu v-if="item.children && item.children.length" :index="item.value">
+        <template v-for="(item, index) in NavArr">
+          <el-submenu v-if="item.children && item.children.length" :index="item.value" :key="index">
             <template slot="title">
               <i :class="item.icon"></i>
-              <span>{{ item.label }}</span>
+              <span slot="title">{{ item.label }}</span>
             </template>
             <div>
               <el-menu-item
@@ -31,12 +31,16 @@
               </el-menu-item>
             </div>
           </el-submenu>
-          <el-menu-item v-else :index="item.value" @click="goPath(item.value)">
+          <el-menu-item v-else :index="item.value" @click="goPath(item.value)" :key="(index = 'direct')">
             <i :class="item.icon"></i>
-            <span>{{ item.label }}</span>
+            <span slot="title">{{ item.label }}</span>
           </el-menu-item>
-        </div>
+        </template>
       </el-menu>
+      <div class="footer-collapse" @click="expandMenu">
+        <i v-if="isCollapse" class="el-icon-s-fold"></i>
+        <i v-else class="el-icon-s-unfold"></i>
+      </div>
     </div>
     <div ref="website" class="websiteContainer">
       <router-view></router-view>
@@ -51,10 +55,13 @@ export default {
       NavArr,
       curActive: NavArr[0].value,
       openedArr: ['website'],
-      isCollapse: true,
+      isCollapse: false,
     };
   },
   methods: {
+    expandMenu() {
+      this.isCollapse = !this.isCollapse;
+    },
     handleOpen(key, keyPath) {
       // console.log(key, keyPath);
     },
@@ -80,12 +87,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
 .navScroll {
-  // width: 200px;
-  height: 100vh;
+  position: relative;
+  height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  background-color: lightgrey;
   border-radius: 10px;
 }
 .navScroll::-webkit-scrollbar {
@@ -95,9 +108,9 @@ export default {
   background-color: lightcoral;
 }
 .websiteContainer {
+  flex-grow: 1;
   width: calc(100% - 200px);
   overflow: scroll;
-  background-color: lightgrey;
 }
 .websiteContainer::-webkit-scrollbar {
   width: 10px;
@@ -111,5 +124,18 @@ export default {
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 100px;
+}
+
+.footer-collapse {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 28px;
+}
+.el-menu.el-menu--collapse {
+  width: 64px;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
 }
 </style>

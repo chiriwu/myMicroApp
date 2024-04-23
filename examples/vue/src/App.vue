@@ -30,6 +30,7 @@ export default {
   color: #2c3e50;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   text-align: center;
+  background-color: #b2dfee;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
