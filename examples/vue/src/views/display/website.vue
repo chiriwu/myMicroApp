@@ -49,14 +49,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-left: -36px;
-  padding: 12px;
-}
-.websiteCardContainer {
-  margin-left: 36px;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+  margin-bottom: 12px;
 }
 </style>

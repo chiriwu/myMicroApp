@@ -9,6 +9,7 @@ export default [
       title: '编辑器',
       number: 2,
       roleId: 1,
+      hide: true,
     },
   },
 ];

@@ -27,6 +27,7 @@ export default [
       title: '流程图',
       number: 4,
       roleId: 1,
+      hide: true,
     },
   },
   {
@@ -39,6 +40,7 @@ export default [
     meta: {
       number: 5,
       roleId: 1,
+      hide: true,
     },
   },
 ];

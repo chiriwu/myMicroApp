@@ -19,6 +19,7 @@ onMounted(() => {
 
 <style lang="less">
 #app {
+  padding-bottom: 30px;
   color: #2c3e50;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
@@ -28,7 +29,6 @@ onMounted(() => {
 
 #nav {
   padding: 20px;
-
   a {
     color: #2c3e50;
     font-weight: bold;

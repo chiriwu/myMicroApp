@@ -92,18 +92,22 @@ function handleCurrentChange(val) {
   align-items: center;
 }
 .cardContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
   margin-bottom: 20px;
-  margin-left: -20px;
+  @media only screen and (max-width: 640px) {
+    grid-row-gap: 10px;
+  }
 }
 .cardItem {
   // flex: 0 0 30%;
   // width: 300px;
-  margin-bottom: 10px;
-  margin-left: 20px;
+  // margin-bottom: 10px;
+  // margin-left: 20px;
   padding: 5px;
   background-color: lightgreen;
 }

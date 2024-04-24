@@ -49,6 +49,7 @@
 </template>
 <script>
 import { NavArr } from '@/enum.js';
+import { checkMobile } from '@/utils/tools.js';
 export default {
   data() {
     return {
@@ -57,6 +58,11 @@ export default {
       openedArr: ['website'],
       isCollapse: false,
     };
+  },
+  created() {
+    if (checkMobile()) {
+      this.isCollapse = true;
+    }
   },
   methods: {
     expandMenu() {
@@ -99,7 +105,7 @@ export default {
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  border-radius: 10px;
+  border-radius: 0 10px 10px 10px;
 }
 .navScroll::-webkit-scrollbar {
   width: 3px;
@@ -110,7 +116,7 @@ export default {
 .websiteContainer {
   flex-grow: 1;
   width: calc(100% - 200px);
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .websiteContainer::-webkit-scrollbar {
   width: 10px;

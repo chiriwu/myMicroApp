@@ -31,10 +31,10 @@
         <div class="desc">西北海之外，大荒之隅，有山而不合，名曰不周。</div>
       </header>
       <ul id="second-level">
-        <li onclick="push('/vue')">网站导航</li>
-        <li onclick="push('/vue3')">电影资源</li>
-        <li onclick="push('/react16')">管理后台</li>
-        <li onclick="push('/purehtml')">概览页</li>
+        <li onclick="hideMenu('/vue')">网站导航</li>
+        <li onclick="hideMenu('/vue3')">电影资源</li>
+        <li onclick="hideMenu('/react16')">管理后台</li>
+        <li onclick="hideMenu('/purehtml')">概览页</li>
       </ul>
       <div class="mainapp-main">
         <!-- 侧边栏 -->
@@ -67,9 +67,11 @@
       }
 
       function showMenu() {
-        console.log(" document.getElementById('second-level')", document.getElementById('second-level'));
-
         document.getElementById('second-level').style.display = 'block';
+      }
+      function hideMenu(path) {
+        document.getElementById('second-level').style.display = 'none';
+        push(path);
       }
     </script>
     <script>

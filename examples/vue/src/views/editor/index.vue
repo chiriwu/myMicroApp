@@ -2,10 +2,10 @@
   <div class="editor">
     <!-- <editorBase :readOnly="false" style="width: 300px; overflow: hidden"></editorBase>
     <iframe src="https://www.baidu.com" frameborder="0" style="flex: 1"></iframe> -->
-    <button style="font-size: 30px;" @click="runMyProject">运行</button style="font-size: 30px;">
-    <div style="display: flex; flex-direction: row;padding: 10px;">
-      <editorBase v-model="myCode" :readOnly="false" style="flex: 1; overflow: hidden"></editorBase>
-      <div style="flex: 1;background-color: #eee;">
+    <el-button type="primary" class="run-btn" @click="runMyProject">运行</el-button>
+    <div class="func-area">
+      <editorBase v-model="myCode" :readOnly="false" class="code-area"></editorBase>
+      <div class="dom-area">
         <el-checkbox-group v-model="checkList">
           <el-checkbox label="moment"></el-checkbox>
           <el-checkbox label="dayjs"></el-checkbox>
@@ -38,13 +38,12 @@ export default {
 })();`,
       // https://www.jsdelivr.com/package/npm/lodash
       npmList: {
-        'moment': 'https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js',
-      'dayjs': 'https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js',
-      'qs': 'https://cdn.jsdelivr.net/npm/qs@6.11.2/dist/qs.min.js',
-      'lodash': 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
-
+        moment: 'https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js',
+        dayjs: 'https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js',
+        qs: 'https://cdn.jsdelivr.net/npm/qs@6.11.2/dist/qs.min.js',
+        lodash: 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
       },
-    checkList:[],
+      checkList: [],
     };
   },
   components: { editorBase },
@@ -58,14 +57,14 @@ export default {
       const doc = ifrmId.contentDocument ? ifrmId.contentDocument : ifrmId.contentWindow.document;
       let html = document.createElement('html');
       html.innerHTML = this.HtmlCode;
-      this.checkList.forEach(item => {
+      this.checkList.forEach((item) => {
         let ele = document.createElement('script');
         ele.src = this.npmList[item];
-        html.appendChild(ele)
-      })
+        html.appendChild(ele);
+      });
       let editorScript = document.createElement('script');
       editorScript.innerHTML = this.myCode;
-      html.appendChild(editorScript)
+      html.appendChild(editorScript);
       console.log('doc=', html.innerHTML);
       doc.open();
       doc.write(html.innerHTML);
@@ -74,7 +73,25 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+.run-btn {
+  margin-top: 12px;
+  font-size: 1.2rem;
+}
+.func-area {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  .code-area {
+    flex: 1;
+    overflow: hidden;
+  }
+  .dom-area {
+    flex: 1;
+    background-color: #eee;
+  }
+}
+
 .editor {
   color: #7265e6;
 }

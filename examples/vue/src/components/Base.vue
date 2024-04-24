@@ -77,9 +77,7 @@ export default {
 </style> -->
 
 <template>
-  <div>
-    <div id="container"></div>
-  </div>
+  <div id="container"></div>
 </template>
 
 <script>
@@ -134,6 +132,16 @@ export default {
       this.camera = new THREE.PerspectiveCamera(70, container.clientWidth / container.clientHeight, 0.01, 10);
       this.camera.position.z = 1;
 
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.target === container) {
+            const { width, height } = entry.contentRect;
+            console.log('width,height', width, height);
+            this.renderer.setSize(width, height);
+          }
+        }
+      });
+      resizeObserver.observe(container);
       /**
        * 创建渲染器对象
        */
@@ -158,7 +166,6 @@ export default {
 
 <style>
 #container {
-  position: absolute;
   width: 100%;
   height: 100%;
 }

@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { checkMobile } from '@/utils/tools.js';
+
 export default {
   data() {
     return {
@@ -37,8 +39,15 @@ export default {
     menuItems() {
       const routes = this.$router.options.routes;
       const roleId = this.$store.state.roleId;
+      const isMobile = checkMobile();
       return routes
         .filter((item) => item.meta && item.meta.roleId <= roleId && !item.meta.isLoginPage)
+        .filter((item) => {
+          if (isMobile && item.meta.hide) {
+            return false;
+          }
+          return true;
+        })
         .sort((a, b) => a.meta.number - b.meta.number);
     },
     roleId() {
@@ -85,6 +94,6 @@ ul.nav-menu li.active {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-radius: 15px;
+  border-radius: 15px 15px 15px 0;
 }
 </style>
