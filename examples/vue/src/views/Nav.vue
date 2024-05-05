@@ -76,6 +76,7 @@ export default {
 
 <style scoped>
 .header-container {
+  height: $header-height;
 }
 ul.nav-menu {
   display: flex;

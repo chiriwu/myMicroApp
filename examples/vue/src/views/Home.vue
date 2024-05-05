@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <div class="content-container" :class="{ 'is-inner': isQiankun }" id="website-content">
     <!-- 这个得弄个媒体查询，手机网页版的 -->
     <div class="navScroll">
       <el-menu
@@ -57,11 +57,17 @@ export default {
       curActive: NavArr[0].value,
       openedArr: ['website'],
       isCollapse: false,
+      isQiankun: false,
     };
   },
   created() {
     if (checkMobile()) {
       this.isCollapse = true;
+    }
+  },
+  mounted() {
+    if (document.querySelector('#website-content').getBoundingClientRect() > 100) {
+      this.isQiankun = true;
     }
   },
   methods: {
@@ -100,6 +106,9 @@ export default {
   height: calc(100vh - 60px);
   overflow: hidden;
 }
+.is-inner {
+  height: calc(100vh - (136px));
+}
 .navScroll {
   position: relative;
   height: 100%;
@@ -117,6 +126,7 @@ export default {
   flex-grow: 1;
   width: calc(100% - 200px);
   overflow-y: scroll;
+  background-color: #b2dfee;
 }
 .websiteContainer::-webkit-scrollbar {
   width: 10px;

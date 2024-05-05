@@ -42,6 +42,7 @@ export default {
   margin: 0 auto;
   margin-top: 100px;
   padding: 20px;
+  background-color: #b2dfee;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
