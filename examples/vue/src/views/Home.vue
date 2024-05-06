@@ -146,7 +146,8 @@ export default {
   position: absolute;
   right: 10px;
   bottom: 10px;
-  font-size: 28px;
+  color: white;
+  font-size: 26px;
 }
 .el-menu.el-menu--collapse {
   width: 64px;
