@@ -33,7 +33,7 @@ export default {
       this.list.splice(index, 1);
     },
     verifyNpm() {
-      for (let i; i < this.list.length; i++) {
+      for (let i = 0; i < this.list.length; i++) {
         if (!this.list[i][0] || !this.list[i][1]) {
           return false;
         }

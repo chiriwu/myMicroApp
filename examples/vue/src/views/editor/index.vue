@@ -8,7 +8,10 @@
         <h2 class="desc-title">依赖</h2>
         <span class="separate-line"></span>
         <el-checkbox-group class="denpendcy-item" v-model="checkList">
-          <el-checkbox v-for="(item, key) in npmList" :key="key" :label="item">{{ key }}</el-checkbox>
+          <div class="dependcy-row" v-for="(item, key) in npmList" :key="key">
+            <el-checkbox :label="item">{{ key }}</el-checkbox>
+            <el-button class="opearte-btn" type="text" icon="el-icon-close" @click="deleteLink(key)"></el-button>
+          </div>
         </el-checkbox-group>
         <el-button type="primary" class="add-btn" @click="showAddDenpendCyModal">添加依赖</el-button>
       </div>
@@ -17,8 +20,6 @@
         <editorBase v-model="myCode" :readOnly="false"></editorBase>
       </div>
       <div class="dom-area">
-        <!-- <el-button type="text">文字按钮</el-button> -->
-        <!-- <h2 class="desc-title" @click="runMyProject">运行</h2> -->
         <el-button type="primary" class="run-btn" @click="runMyProject">运行</el-button>
         <iframe id="myFrame" frameborder="0"></iframe>
       </div>
@@ -50,7 +51,8 @@ export default {
         </body>
         </html>`,
       myCode: `(function () {
-  document.querySelector("body").innerHTML = "nihoa, bro"
+  const curTime = dayjs().format("YYYY-MM-DD HH:mm:ss");
+  document.querySelector("body").innerHTML = "nihoa, bro, " + curTime
 })();`,
       // https://www.jsdelivr.com/package/npm/lodash
       npmList: {
@@ -59,8 +61,9 @@ export default {
         qs: 'https://cdn.jsdelivr.net/npm/qs@6.11.2/dist/qs.min.js',
         lodash: 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
       },
-      checkList: [],
+      checkList: ['https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js'],
       dialogVisible: false,
+      keyStart: 'localNpmLink',
     };
   },
   components: { editorBase, addDenpendcy },
@@ -70,7 +73,6 @@ export default {
   },
   methods: {
     runMyProject() {
-      console.log(this.myCode, typeof this.myCode);
       const ifrmId = document.getElementById('myFrame');
       const doc = ifrmId.contentDocument ? ifrmId.contentDocument : ifrmId.contentWindow.document;
       let html = document.createElement('html');
@@ -93,15 +95,15 @@ export default {
       const len = localStorage.length;
       // 创建一个数组，用于存储 localStorage 中的所有键
       const keys = {};
-      const keyStart = 'localNpmLink';
+
       // 遍历 localStorage 中的所有键，并将它们存储到数组中
       for (let i = 0; i < len; i++) {
-        if (localStorage.key(i).startsWith(keyStart)) {
-          const key = localStorage.key(i).substring(keyStart.length);
-          keys[key] = localStorage.getItem(localStorage.key(i));
+        if (localStorage.key(i).startsWith(this.keyStart)) {
+          const key = localStorage.key(i).substring(this.keyStart.length);
+          const value = localStorage.getItem(localStorage.key(i));
+          if (value) keys[key] = value;
         }
       }
-      console.log('localkyes=', keys);
       this.npmList = Object.assign(this.npmList, keys);
       this.$forceUpdate();
       return keys;
@@ -112,6 +114,13 @@ export default {
     },
     handleClose() {
       this.dialogVisible = false;
+    },
+    deleteLink(key) {
+      delete this.npmList[key];
+      if (localStorage.getItem(this.keyStart + key)) {
+        localStorage.removeItem(this.keyStart + key);
+      }
+      this.$forceUpdate();
     },
     async verifyNpm() {
       let res = await this.$refs.dependcyRef.verifyNpm();
@@ -132,6 +141,7 @@ $descHeight: 50px;
 .run-btn {
   display: block;
   margin-top: 2px;
+  margin-bottom: 20px;
   font-size: 1.2rem;
 }
 .el-checkbox {
@@ -167,9 +177,15 @@ $descHeight: 50px;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      padding-top: 10px;
-      padding-left: 10px;
+      padding: 10px 10px 0 10px;
       color: white;
+      .dependcy-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
     }
     .add-btn {
       margin-top: 10px;
