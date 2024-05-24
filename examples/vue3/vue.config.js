@@ -49,12 +49,23 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.m?js$/,
+          // test: /\.m?js$/,
+          test: /\.(t|j)sx?$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
-              presets: [['@babel/preset-env', { targets: 'defaults' }]],
+              presets: [
+                ['@babel/preset-env', { targets: 'defaults' }],
+                [
+                  '@babel/preset-typescript',
+                  {
+                    isTSX: true,
+                    allExtensions: true,
+                    appendTsSuffixTo: [/\.vue$/],
+                  },
+                ],
+              ],
             },
           },
         },

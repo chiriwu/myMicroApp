@@ -7,7 +7,7 @@
         </template>
       </el-input>
     </div>
-    <div class="cardContainer">
+    <div class="cardContainer" v-loading="isLoading">
       <Card
         v-for="(item, index) in dataList"
         :key="index"
@@ -15,8 +15,10 @@
         :config="item"
         @click="jumpUrl(item.id)"
       ></Card>
+      <div v-if="!dataList.length" style="margin: 50px 0 20px 0">暂无数据</div>
     </div>
     <el-pagination
+      v-if="dataList.length"
       medium
       background
       layout="prev, pager, next"
@@ -28,19 +30,27 @@
     />
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import Card from '@/components/Card.vue';
+import { isEmpty } from '../utils/func.js';
 import { defineProps, ref, inject, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const props = defineProps(['label']);
 const global = inject('global');
 let dataList = ref([]);
-let total = ref(0);
+let total = ref<number>(0);
 let currentPage = ref(1);
 const pageSize = 12;
 const searchWord = ref('');
+const isLoading = ref<Boolean>(false);
+
 function search() {
+  isLoading.value = true;
+  if (isEmpty(searchWord.value)) {
+    fetchData();
+    return;
+  }
   global
     .api(`/api/wish/search?keyword=${searchWord.value}`)
     .then(({ code, data, msg }) => {
@@ -48,8 +58,10 @@ function search() {
       console.log('data=', data);
       dataList.value = data.list;
       total.value = data.count;
+      isLoading.value = false;
     })
     .catch((err) => {
+      isLoading.value = false;
       console.log(err);
     });
 }
@@ -64,6 +76,7 @@ function jumpUrl(id) {
 }
 
 function fetchData(page = 1) {
+  isLoading.value = true;
   global
     .api(`/api/wish/list?category=${props.label}&page=${page}&rows=${pageSize}`)
     .then(({ code, data, msg }) => {
@@ -71,8 +84,10 @@ function fetchData(page = 1) {
       console.log('data=', data);
       dataList.value = data.list;
       total.value = data.count;
+      isLoading.value = false;
     })
     .catch((err) => {
+      isLoading.value = false;
       console.log(err);
     });
 }
