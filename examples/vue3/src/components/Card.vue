@@ -103,7 +103,7 @@ function filterDate(d) {
   align-items: center;
   justify-content: center;
   height: 30px;
-  color: #222;
+  color: rgba(0, 0, 0, 0.35);
   font-size: 13px;
   /* width: 300px; */
   div:not(:first-child) {
@@ -115,7 +115,7 @@ function filterDate(d) {
     align-items: center;
     height: 30px;
     span {
-      margin-left: 2px;
+      margin-left: 4px;
       line-height: 13px;
     }
   }
