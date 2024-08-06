@@ -4,7 +4,7 @@ export default [
   {
     path: '/editor',
     name: 'editor',
-    component: () => import('@/views/editor'),
+    component: () => import(/* webpackChunkName: "edit" */ '@/views/editor'),
     meta: {
       title: '编辑器',
       number: 2,

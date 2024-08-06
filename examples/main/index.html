@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet/less" href="/index.less" />
+    <meta name="description" content="wjx的练习项目" />
+    <!-- <link rel="stylesheet/less" href="/index.less" /> -->
+    <link rel="stylesheet" href="/index.css" />
     <title>不周山</title>
   </head>
-  <script src="https://cdn.jsdelivr.net/npm/less@4.2.0/dist/less.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/less@4.2.0/dist/less.min.js"></script> -->
   <body>
     <div class="mainapp">
       <!-- 标题栏 -->
@@ -67,7 +69,9 @@
       }
 
       function showMenu() {
-        document.getElementById('second-level').style.display = 'block';
+        const showStatus = document.getElementById('second-level').style.display;
+        document.getElementById('second-level').style.display = showStatus === 'block' ? 'none' : 'block';
+        // document.getElementById('second-level').style.display = 'block';
       }
       function hideMenu(path) {
         document.getElementById('second-level').style.display = 'none';
@@ -79,6 +83,7 @@
       (function () {
         var hm = document.createElement('script');
         hm.src = 'https://hm.baidu.com/hm.js?48a9109dca23c993be553ed9c99aa3c6';
+        hm.async = true;
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(hm, s);
       })();

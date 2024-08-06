@@ -1,0 +1,333 @@
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background-color: #000;
+}
+
+body {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Russo One', arial, sans-serif;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.remove {
+  display: none !important;
+}
+
+.blur {
+  filter: blur(12px);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.loading-init {
+  align-self: center;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+}
+.loading-init__header {
+  font-size: 2.2em;
+}
+.loading-init__status {
+  margin-top: 1em;
+  font-size: 1em;
+  opacity: 0.75;
+}
+
+.stage-container {
+  box-sizing: initial;
+  margin: -1px;
+  overflow: hidden;
+  border: 1px solid #222;
+}
+@media (max-width: 840px) {
+  .stage-container {
+    margin: 0;
+    border: none;
+  }
+}
+
+.canvas-container {
+  width: 100%;
+  height: 100%;
+  transition: filter 0.3s;
+}
+.canvas-container canvas {
+  position: absolute;
+  transform: translateZ(0);
+  mix-blend-mode: lighten;
+}
+
+.controls {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 50px;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+@media (min-width: 840px) {
+  .controls {
+    visibility: visible;
+  }
+  .controls.hide:hover {
+    opacity: 1;
+  }
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.42);
+  transition: opacity 0.3s, visibility 0.3s;
+}
+.menu__inner-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+.menu__header {
+  margin-top: auto;
+  margin-bottom: 8px;
+  padding-top: 16px;
+  font-size: 2em;
+  text-transform: uppercase;
+}
+.menu__subheader {
+  margin-bottom: auto;
+  padding-bottom: 12px;
+  font-size: 1em;
+  opacity: 0.8;
+}
+.menu form {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 10px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.menu .form-option {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+  transition: opacity 0.3s;
+}
+.menu .form-option label {
+  display: block;
+  width: 50%;
+  padding-right: 12px;
+  text-align: right;
+  text-transform: uppercase;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.menu .form-option--select select {
+  display: block;
+  width: 50%;
+  height: 30px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  font-family: 'Russo One', arial, sans-serif;
+  letter-spacing: 0.06em;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.menu .form-option--select select option {
+  background-color: black;
+}
+.menu .form-option--checkbox input {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  opacity: 0.5;
+}
+@media (max-width: 840px) {
+  .menu .form-option select,
+  .menu .form-option input {
+    outline: none;
+  }
+}
+
+.close-menu-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.btn {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  cursor: default;
+  opacity: 0.16;
+  transition: opacity 0.3s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.btn--bright {
+  opacity: 0.5;
+}
+@media (min-width: 840px) {
+  .btn:hover {
+    opacity: 0.32;
+  }
+  .btn--bright:hover {
+    opacity: 0.75;
+  }
+}
+.btn svg {
+  display: block;
+  margin: auto;
+}
+
+.credits {
+  margin-top: auto;
+  margin-bottom: 10px;
+  padding-top: 6px;
+  font-size: 1em;
+  opacity: 0.75;
+}
+.credits a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+.credits a:hover,
+.credits a:active {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
+}
+
+.help-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  transition-duration: 0.25s;
+  transition-property: visibility;
+}
+.help-modal__overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition-timing-function: ease-in;
+  transition-duration: 0.25s;
+  transition-property: opacity;
+}
+.help-modal__dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  max-height: calc(100vh - 100px);
+  margin: 10px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 0.3em;
+  transform: scale(0.9, 0.9);
+  opacity: 0;
+  transition-timing-function: ease-in;
+  transition-duration: 0.25s;
+  transition-property: opacity, transform;
+}
+@media (min-width: 840px) {
+  .help-modal__dialog {
+    max-width: 500px;
+    font-size: 1.25rem;
+  }
+}
+.help-modal__header {
+  font-size: 1.75em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.help-modal__body {
+  margin: 1em 0;
+  padding: 1em 0;
+  overflow-y: auto;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  -webkit-overflow-scrolling: touch;
+}
+.help-modal__close-btn {
+  flex-shrink: 0;
+  margin-top: 0.36em;
+  padding: 0.25em 0.75em;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1em;
+  font-family: 'Russo One', arial, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  transition: color 0.3s, background-color 0.3s;
+}
+.help-modal__close-btn:hover,
+.help-modal__close-btn:active,
+.help-modal__close-btn:focus {
+  color: #fff;
+  background-color: #09f;
+}
+.help-modal.active {
+  visibility: visible;
+  transition-duration: 0.4s;
+}
+.help-modal.active .help-modal__overlay {
+  opacity: 1;
+  transition-timing-function: ease-out;
+  transition-duration: 0.4s;
+}
+.help-modal.active .help-modal__dialog {
+  transform: scale(1, 1);
+  opacity: 1;
+  transition-timing-function: ease-out;
+  transition-duration: 0.4s;
+}

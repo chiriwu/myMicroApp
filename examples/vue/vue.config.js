@@ -1,7 +1,7 @@
 const path = require('path');
 const { name } = require('./package');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-
+const TerserPlugin = require('terser-webpack-plugin');
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -22,6 +22,10 @@ module.exports = {
   assetsDir: 'static',
   filenameHashing: true,
   publicPath: _publicPath,
+  // optimization: {
+  //   minimize: true,
+  //   minimize: [new TerserPlugin()],
+  // },
   chainWebpack: (config) => {
     // 匹配相应的文件进行配置,解决element的静态文件在线上路径没有加上publicPath
     config.module
@@ -80,7 +84,11 @@ module.exports = {
       libraryTarget: 'umd',
       jsonpFunction: `webpackJsonp_${name}`,
     },
-    plugins: [new MonacoWebpackPlugin()],
+    plugins: [
+      new MonacoWebpackPlugin({
+        languages: [], // ts.work.js过大，去除ts语言，
+      }),
+    ],
     module: {
       // rules: [
       //   {

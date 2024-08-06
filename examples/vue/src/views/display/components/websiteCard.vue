@@ -1,7 +1,15 @@
 <template>
   <div class="card" @click="redirectToLink">
     <div class="card-image">
-      <img :src="imgUrl" width="64px" height="64px" style="object-fit: cover" alt="Card Cover" />
+      <img
+        :data-src="imgUrl"
+        :src="defaultImg"
+        width="64px"
+        height="64px"
+        class="lazy"
+        style="object-fit: cover"
+        alt="网站图标"
+      />
     </div>
     <div class="card-content">
       <div class="card-title">{{ title }}</div>
@@ -11,9 +19,12 @@
 </template>
 
 <script>
+import defaultImg from '@/assets/defaultImg.svg';
+
 export default {
   data() {
     return {
+      defaultImg,
       websites: [
         {
           id: 1,
@@ -49,9 +60,37 @@ export default {
       default: '',
     },
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.lazyLoad();
+    });
+  },
   methods: {
     redirectToLink() {
       window.open(this.src);
+    },
+    lazyLoad() {
+      var lazyImages = document.querySelectorAll('img.lazy');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var img = entry.target;
+            debugger;
+            let trueSrc = img.getAttribute('data-src');
+            //把值赋值给图片的src属性
+            // i.setAttribute("src", trueSrc);
+
+            img.src = trueSrc;
+            img.onload = function () {
+              img.classList.remove('lazy');
+            };
+            observer.unobserve(img);
+          }
+        });
+      });
+      lazyImages.forEach(function (img) {
+        observer.observe(img);
+      });
     },
   },
 };

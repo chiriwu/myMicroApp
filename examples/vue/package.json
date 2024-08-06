@@ -28,6 +28,7 @@
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
     "monaco-editor": "^0.30.1",
+    "terser-webpack-plugin": "4.2.3",
     "vue-template-compiler": "^2.6.10"
   }
 }
