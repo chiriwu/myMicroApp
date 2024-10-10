@@ -5,8 +5,8 @@
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
+      background-color="#f8f8ff"
+      text-color="#000"
       active-text-color="#ffd04b"
     >
       <el-menu-item v-for="(item, index) in menuItems" :key="index" :index="item.name">{{

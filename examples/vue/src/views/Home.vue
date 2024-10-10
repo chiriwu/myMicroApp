@@ -9,8 +9,8 @@
         @open="handleOpen"
         @close="handleClose"
         :default-openeds="openedArr"
-        background-color="#545c64"
-        text-color="#fff"
+        background-color="#f8f8ff"
+        text-color="#000"
         active-text-color="#ffd04b"
         :collapse="isCollapse"
       >

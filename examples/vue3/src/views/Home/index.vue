@@ -1,5 +1,8 @@
 <template>
   <div class="navContainer">
+    <!-- <el-select v-model="activeName" placeholder="请选择" >
+      <el-option v-for="item in navArr" :key="item.name" :label="item.label" :value="item.name"> </el-option>
+    </el-select> -->
     <el-tabs v-model="activeName" class="demo-tabs">
       <el-tab-pane v-for="item in navArr" :key="item.name" :label="item.label" :name="item.name">
         <component :is="item.components" :label="item.label"></component>
