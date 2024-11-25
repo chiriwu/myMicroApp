@@ -1,10 +1,5 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <!-- <router-link to="/home">Home</router-link> |
-      <router-link to="/detail">Detail</router-link>
-      hello -->
-    </div>
+  <div id="container">
     <router-view />
   </div>
 </template>
@@ -17,12 +12,14 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less">
-#app {
+<style lang="less" scoped>
+#container {
+  padding: 12px;
   padding-bottom: 30px;
   color: #2c3e50;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
+  background-image: linear-gradient(to right bottom, rgb(220, 252, 231), rgb(219, 234, 254));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -22,7 +22,7 @@ export default function () {
       id: 'player',
       url: 'http://m10.music.126.net/20240120225401/dcbdb1b03ab81885a1bc948f89d68da8/ymusic/5353/0f0f/0358/d99739615f8e5153d77042092f07fd77.mp3',
       volume: 0.8,
-      width: '600px',
+      width: '100%',
       height: 50,
       mediaType: 'audio',
       presets: ['default', MusicPreset],

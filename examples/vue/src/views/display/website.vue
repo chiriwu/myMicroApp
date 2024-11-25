@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>{{ websites.label || '暂无数据' }}</h1>
     <div class="container">
       <div class="websiteCardContainer" v-for="(item, index) in websites.children" :key="index">
         <websiteCard

@@ -125,3 +125,6 @@ canvas {
   color: #eee;
   background-color: white;
 }
+#player {
+  width: 100%;
+}

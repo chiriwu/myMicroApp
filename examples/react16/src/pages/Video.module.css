@@ -6,13 +6,18 @@
   padding-top: 20px;
 }
 .player {
+  flex: 1;
   width: calc(100% - 360px);
+  width: 100%;
+  min-width: 376px;
   margin-bottom: 20px;
 }
 .playSide {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  width: 320px;
+  width: 100%;
+  min-width: 320px;
 }
 .playInfo {
   padding: 10px;

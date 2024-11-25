@@ -5,23 +5,27 @@
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
-      background-color="#f8f8ff"
-      text-color="#000"
+      background-color="rgb(241,249,243)"
+      text-color="rgb(9,9,11)"
       active-text-color="#ffd04b"
     >
       <el-menu-item v-for="(item, index) in menuItems" :key="index" :index="item.name">{{
         item.meta.title || item.name
       }}</el-menu-item>
-      <div style="position: absolute; float: right; right: 0; height: 60px; line-height: 60px; margin-right: 20px">
-        <el-button v-if="roleId === 0" @click="goLoginPage" type="text">登录</el-button>
-        <div v-else style="display: flex; flex-direction: row">
-          <span style="margin-right: 5px; color: greenyellow"><i class="el-icon-user"></i>开发者 </span>
-          <el-popconfirm title="确定退出吗" @confirm="exitLogin">
-            <el-button slot="reference" type="text">退出</el-button>
-          </el-popconfirm>
-        </div>
-      </div>
     </el-menu>
+    <div class="login-container">
+      <el-button v-if="roleId === 0" @click="goLoginPage" type="text">登录</el-button>
+      <div v-else style="display: flex; flex-direction: row">
+        <el-dropdown>
+          <span class="el-dropdown-link"> 开发者<i class="el-icon-arrow-down el-icon--right"></i> </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>
+              <el-button @click="exitLogin" type="text">退出</el-button>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,7 +80,11 @@ export default {
 
 <style scoped>
 .header-container {
-  height: $header-height;
+  /* height: $header-height; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(241, 249, 243);
 }
 ul.nav-menu {
   display: flex;
@@ -94,7 +102,12 @@ ul.nav-menu li.active {
 .el-menu-demo {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   border-radius: 15px 15px 15px 0;
+}
+.login-container {
+  height: 60px;
+  margin-right: 20px;
+  line-height: 60px;
 }
 </style>

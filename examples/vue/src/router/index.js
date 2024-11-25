@@ -10,24 +10,19 @@ const routes = [
     path: '/',
     name: 'home',
     component: () => import('@/views/Home.vue'),
-    redirect: '/home/base',
+    redirect: '/home',
   },
   {
     path: '/home',
     name: 'home',
     component: () => import('@/views/Home.vue'),
-    redirect: '/home/base',
+    redirect: '/home/website/ai',
     meta: {
       number: 1,
       roleId: 0,
       title: '首页',
     },
     children: [
-      {
-        path: 'base',
-        name: 'base',
-        component: () => import('@/components/Base.vue'),
-      },
       {
         path: 'website/:name',
         name: 'website',

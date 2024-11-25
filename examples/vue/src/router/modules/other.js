@@ -31,6 +31,16 @@ export default [
     },
   },
   {
+    path: '/base',
+    name: 'base',
+    component: () => import('@/components/Base.vue'),
+    meta: {
+      title: 'Paint',
+      number: 5,
+      roleId: 1,
+    },
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting
@@ -38,7 +48,7 @@ export default [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
     meta: {
-      number: 5,
+      number: 6,
       roleId: 1,
       hide: true,
     },

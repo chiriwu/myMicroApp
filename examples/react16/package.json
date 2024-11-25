@@ -34,6 +34,5 @@
   "devDependencies": {
     "@rescripts/cli": "^0.0.14",
     "react-scripts": "^3.4.1"
-  },
-  "proxy": "http://127.0.0.1:3000"
+  }
 }

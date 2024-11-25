@@ -9,9 +9,9 @@ const api = axios.create({
   baseURL: '', // 所有请求的公共地址部分
   timeout: 3000, // 请求超时时间,这里的意思是当请求时间超过5秒还未取得结果时,提示用户请求超时
 });
-
+api.defaults.baseURL = 'https://www.wjx666.top:3000';
 if (process.env.NODE_ENV === 'production') {
-  api.defaults.baseURL = 'http://wjx666.top:3000';
+  api.defaults.baseURL = 'https://www.wjx666.top:3000';
 }
 // 请求拦截处理 请求拦截 在请求拦截中可以补充请求相关的配置
 // interceptors axios的拦截器对象

@@ -42,7 +42,8 @@ export default function () {
       el: document.querySelector('#' + id),
       url: testUrlList[curIndex],
       pip: true,
-      width: containerWidth - 360 + 'px',
+      // width: containerWidth - 360 + 'px',
+      width: '100%',
     });
   };
   const toggleVideoUrl = function (index) {

@@ -3,7 +3,7 @@ const { name } = require('./package');
 module.exports = {
   // publicPath: '/v1/react/',
   webpack: (config) => {
-    config.output.publicPath = '/v1/react';
+    // config.output.publicPath = '/v1/react';
     config.output.library = `${name}-[name]`;
     config.output.libraryTarget = 'umd';
     config.output.jsonpFunction = `webpackJsonp_${name}`;

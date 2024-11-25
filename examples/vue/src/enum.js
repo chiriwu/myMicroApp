@@ -1,7 +1,7 @@
 export const NavArr = [
   {
     label: '首页',
-    value: 'base',
+    value: 'home',
     icon: 'el-icon-s-home',
     // children: [],
   },
@@ -23,10 +23,6 @@ export const NavArr = [
       { label: '软件下载', value: 'software' },
       { label: '发现资源', value: 'resource' },
       { label: '探索发现', value: 'explore' },
-      {
-        label: '其他',
-        value: 'other',
-      },
     ],
   },
 ];
@@ -34,3 +30,4 @@ export const roleId = {
   0: '访客',
   1: '开发者',
 };
+export const webSiteArr = NavArr[1].children;

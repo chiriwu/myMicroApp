@@ -8,7 +8,7 @@
           </div>
         </template>
       </el-image>
-      <div class="title" @click.stop="">
+      <div class="title">
         {{ config.name }}
       </div>
     </div>
@@ -16,15 +16,15 @@
     <div class="line" @click.stop=""></div>
     <div class="labels" @click.stop="">
       <div>
-        <el-icon :size="18" color="#409EFC"><List /></el-icon>
+        <!-- <el-icon :size="18" color="#409EFC"><List /></el-icon> -->
         <span>{{ filterDate(config.createdAt) }}</span>
       </div>
       <div>
-        <el-icon :size="15" color="#409EFC"><View /></el-icon>
+        <el-icon :size="15" color="rgb(107,114,128)"><View /></el-icon>
         <span>{{ config.pv }}</span>
       </div>
       <div>
-        <el-icon :size="18" color="#409EFC"><Document /></el-icon>
+        <el-icon :size="18" color="rgb(107,114,128)"><Document /></el-icon>
         <span>{{ config.category }}</span>
       </div>
     </div>
@@ -44,7 +44,7 @@ function filterDate(d) {
   width: 300px;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  // box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
   @media only screen and (max-width: 640px) {
     width: 360px;
   }
@@ -53,17 +53,20 @@ function filterDate(d) {
     flex-direction: column;
     align-items: center;
     width: 300px;
-    // height: 425px;
-    // background-color: #eee;
-    // cursor: pointer;
+    width: 100%;
+    font-weight: 700;
+    font-size: 18px;
     .image-container {
       width: 300px;
       height: 425px;
       background-color: #eee;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
       cursor: pointer;
     }
     .title {
-      width: 300px;
+      width: calc(100% - 90px);
+      margin: 0 12px;
       overflow: hidden;
       color: rgba(0, 0, 0, 0.8);
       font-size: 14px;
@@ -71,6 +74,7 @@ function filterDate(d) {
       white-space: nowrap;
       text-align: center;
       text-overflow: ellipsis;
+      cursor: pointer;
     }
     @media only screen and (max-width: 640px) {
       flex-direction: row;
@@ -101,10 +105,14 @@ function filterDate(d) {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   height: 30px;
-  color: rgba(0, 0, 0, 0.35);
+  padding: 0 30px;
+  color: rgba(107, 114, 128);
   font-size: 13px;
+  background-color: rgb(249, 250, 251);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
   /* width: 300px; */
   div:not(:first-child) {
     margin-left: 8px;

@@ -52,15 +52,15 @@ export default function () {
     allLive.insertBefore(newLive, allLive.lastChild);
     createPlayer(randomId, url);
     // 设置最大可设置第几个删除直播间
-    const length = Array.from(document.querySelectorAll('#allLive')).length;
-    setMaxLiveNum(length - 2);
+    const length = Array.from(document.querySelectorAll('#allLive>div')).length;
+    setMaxLiveNum(length - 1);
   };
   const deleteOneLive = function () {
     const el = document.querySelector(`#allLive:nth-child(${liveOrder})`);
     el.remove();
   };
   const [liveUrl, setLiveUrl] = useState(defaultUrl);
-  const [liveOrder, setLiveOrder] = useState(0);
+  const [liveOrder, setLiveOrder] = useState(2);
   const [maxLiveNum, setMaxLiveNum] = useState(1);
 
   return (
@@ -68,6 +68,14 @@ export default function () {
       <div id="player"></div>
       <div>
         <div>
+          <Input
+            onChange={(e) => {
+              setLiveUrl(e.target.value);
+            }}
+            style={{ width: '400px', marginBottom: '5px', marginRight: '5px' }}
+            addonBefore="推流m3u8地址:"
+            value={liveUrl}
+          />
           <Button
             onClick={() => {
               addOneLive(liveUrl);
@@ -76,32 +84,26 @@ export default function () {
           >
             添加一个直播间
           </Button>
-          <Input
-            onChange={(e) => {
-              setLiveUrl(e.target.value);
-            }}
-            style={{ width: '400px', marginLeft: '10px' }}
-            addonBefore="推流m3u8地址:"
-            value={liveUrl}
-          />
         </div>
-        <div>
-          <Button onClick={deleteOneLive} type="primary">
-            删除一个直播间
-          </Button>
-          <InputNumber
-            onChange={(v) => {
-              setLiveOrder(v);
-            }}
-            max={maxLiveNum}
-            min={1}
-            style={{ width: '200px', marginLeft: '10px' }}
-            addonBefore="第"
-            addonAfter="个"
-            value={liveOrder}
-            defaultValue="0"
-          />
-        </div>
+        {maxLiveNum > 1 && (
+          <div>
+            <InputNumber
+              onChange={(v) => {
+                setLiveOrder(v);
+              }}
+              max={maxLiveNum}
+              min={2}
+              style={{ width: '200px', marginRight: '5px', marginBottom: '5px' }}
+              addonBefore="第"
+              addonAfter="个"
+              value={liveOrder}
+              defaultValue="0"
+            />
+            <Button onClick={deleteOneLive} type="primary">
+              删除一个直播间
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

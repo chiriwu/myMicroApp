@@ -77,7 +77,9 @@ export default {
 </style> -->
 
 <template>
-  <div id="container"></div>
+  <div class="sceneContainer">
+    <div id="container"></div>
+  </div>
 </template>
 
 <script>
@@ -164,7 +166,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.sceneContainer {
+  height: 100vh;
+  overflow-y: scroll;
+  background-color: rgb(245, 249, 254);
+}
 #container {
   width: 100%;
   height: 100%;

@@ -4,6 +4,8 @@
     <div v-for="(item, index) in dataDetail" :key="index" :style="{ color: colorSet[index], 'margin-bottom': '24px' }">
       <div class="itemcard" v-for="(v, k) in item" :key="k">
         {{ v }}
+        <a class="link" v-if="isPanLink(v)" :href="getCombinePanLink(item, k, v)" target="__blank">链接直达</a>
+        <a class="link" v-if="isQuarkLink(v)" :href="v" target="__blank">链接直达</a>
       </div>
     </div>
   </div>
@@ -40,8 +42,6 @@ function fetchData(id) {
       } else {
         dataDetail.value = [['暂无数据']];
       }
-
-      // dataDetail.value = JSON.parse(data.link.replace(/'/g, '"'));
     })
     .catch((err) => {
       console.log(err);
@@ -54,8 +54,21 @@ function jumpLinks() {
   }
   times.value = times.value - 1;
 }
+const isPanLink = (link) => {
+  return link?.startsWith('https://pan.baidu.com/s/');
+};
+const getCombinePanLink = (item, k, v) => {
+  const len = item.length;
+  if (!v?.includes('pwd=') && k <= len - 1) {
+    return v + '&pwd=' + item[k + 1];
+  }
+  return v;
+};
+const isQuarkLink = (link) => {
+  return link?.startsWith('https://pan.quark.cn/s/');
+};
+
 onMounted(() => {
-  // console.log('this.route=', route.query.id);
   if (route.query.id) {
     fetchData(route.query.id);
   } else {
@@ -72,6 +85,10 @@ onMounted(() => {
 }
 .itemcard {
   padding: 5px;
+  word-break: break-all;
   background-color: #eee;
+}
+.link {
+  margin-left: 8px;
 }
 </style>
