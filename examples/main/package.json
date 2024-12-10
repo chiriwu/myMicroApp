@@ -5,8 +5,8 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack --mode=production",
+    "start": "cross-env NODE_ENV=dev  webpack-dev-server",
     "start:multiple": "cross-env MODE=multiple webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

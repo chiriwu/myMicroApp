@@ -7,8 +7,8 @@ function resolve(dir) {
 }
 
 const port = 7101; // dev port
-
-const _publicPath = '/v1/vue/';
+const isProd = process.env.NODE_ENV === 'production';
+const _publicPath = isProd ? '/v1/vue/' : '/';
 
 module.exports = {
   /**

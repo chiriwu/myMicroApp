@@ -1,9 +1,10 @@
 const { name } = require('./package');
+const isProd = process.env.NODE_ENV === 'production';
+const _publicPath = isProd ? '/v1/react/' : '/';
 
 module.exports = {
-  // publicPath: '/v1/react/',
   webpack: (config) => {
-    // config.output.publicPath = '/v1/react';
+    config.output.publicPath = _publicPath;
     config.output.library = `${name}-[name]`;
     config.output.libraryTarget = 'umd';
     config.output.jsonpFunction = `webpackJsonp_${name}`;

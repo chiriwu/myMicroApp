@@ -15,79 +15,37 @@ render({ loading: true });
 
 const loader = (loading) => render({ loading });
 
+const isProd = process.env.NODE_ENV === 'production';
 /**
  * Step2 注册子应用
  */
 
 registerMicroApps(
   [
-    // {
-    //   name: 'react16',
-    //   entry: '//localhost:7100',
-    //   container: '#subapp-viewport',
-    //   loader,
-    //   activeRule: '/react16',
-    // },
-
-    // {
-    //   name: 'react15',
-    //   entry: '//localhost:7102',
-    //   container: '#subapp-viewport',
-    //   loader,
-    //   activeRule: '/react15',
-    // },
-    // {
-    //   name: 'angular9',
-    //   entry: '//localhost:7103',
-    //   container: '#subapp-viewport',
-    //   loader,
-    //   activeRule: '/angular9',
-    // },
-    // {
-    //   name: 'purehtml',
-    //   entry: '//localhost:7104',
-    //   container: '#subapp-viewport',
-    //   loader,
-    //   activeRule: '/purehtml',
-    // },
-    // {
-    //   name: 'vue3',
-    //   entry: '//localhost:7105',
-    //   container: '#subapp-viewport',
-    //   loader,
-    //   activeRule: '/vue3',
-    // },
-    // {
-    //   name: 'vue',
-    //   entry: '//localhost:7101',
-    //   container: '#subapp-viewport',
-    //   loader,
-    //   activeRule: '/vue',
-    // },
     {
       name: 'react16',
-      entry: '/v1/react/',
+      entry: isProd ? '/v1/react/' : '//localhost:7100',
       container: '#subapp-viewport',
       loader,
       activeRule: '/react16',
     },
     {
       name: 'vue',
-      entry: '/v1/vue/',
+      entry: isProd ? '/v1/vue/' : '//localhost:7101',
       container: '#subapp-viewport',
       loader,
       activeRule: '/vue',
     },
     {
       name: 'vue3',
-      entry: '/v1/vue3/',
+      entry: isProd ? '/v1/vue3/' : '//localhost:7105',
       container: '#subapp-viewport',
       loader,
       activeRule: '/vue3',
     },
     {
       name: 'purehtml',
-      entry: '/v1/native/',
+      entry: isProd ? '/v1/native/' : '//localhost:7104',
       container: '#subapp-viewport',
       loader,
       activeRule: '/purehtml',
@@ -128,7 +86,7 @@ setGlobalState({
 /**
  * Step3 设置默认进入的子应用
  */
-setDefaultMountApp('/purehtml');
+setDefaultMountApp('/react16');
 
 /**
  * Step4 启动应用

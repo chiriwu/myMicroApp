@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const { name } = require('./package');
 
 module.exports = {
@@ -50,6 +51,9 @@ module.exports = {
         removeComments: true,
         collapseWhitespace: true,
       },
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
   ],
 };

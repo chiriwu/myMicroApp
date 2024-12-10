@@ -5,13 +5,15 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
+const isProd = process.env.NODE_ENV === 'production';
+const _publicPath = isProd ? '/v1/vue3/' : '/';
 const port = 7105;
 
 module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   filenameHashing: true,
-  publicPath: '/v1/vue3/',
+  publicPath: _publicPath,
   devServer: {
     hot: true,
     disableHostCheck: true,
@@ -25,9 +27,8 @@ module.exports = {
     },
     proxy: {
       '/api/wish': {
-        // 这个是你要替换的位置
         // target: 'http://localhost:3000', //这个是被替换的目标地址
-        target: 'http://www.wjx666.top:3000', //这个是被替换的目标地址
+        target: 'https://www.wjx666.top:3000', //这个是被替换的目标地址
         secure: true, //接受对方是https的接口
         changeOrigin: true, // 是否需要跨域
       },

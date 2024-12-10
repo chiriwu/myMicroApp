@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="wjx的练习项目" />
-    <!-- <link rel="stylesheet/less" href="/index.less" /> -->
     <link rel="stylesheet" href="/index.css" />
     <title>不周山</title>
   </head>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/less@4.2.0/dist/less.min.js"></script> -->
   <body>
     <div class="mainapp">
       <!-- 标题栏 -->
@@ -18,32 +16,29 @@
         </div>
         <div class="nav-link">
           <ul class="mainapp-sidemenu">
-            <li onclick="push('/vue')">网站导航</li>
-            <li onclick="push('/vue3')">电影资源</li>
-            <li onclick="push('/react16')">媒体体验</li>
-            <!-- <li onclick="push('/react15')">React15</li> -->
-            <!-- <li onclick="push('/angular9')">Angular9</li> -->
-            <li onclick="push('/purehtml')">概览页</li>
+            <li id="mainapp-sidemenu-vue" onclick="push('/vue')">网站导航</li>
+            <li id="mainapp-sidemenu-vue3" onclick="push('/vue3')">电影资源</li>
+            <li id="mainapp-sidemenu-react16" onclick="push('/react16')">媒体体验</li>
+            <li id="mainapp-sidemenu-purehtml" onclick="push('/purehtml')">概览页</li>
           </ul>
         </div>
         <div class="phone-fold" onclick="showMenu()">
-          <!-- <img src="./icon.png">三</img> -->
           <i class="menu-ico"></i>
         </div>
         <div class="desc">西北海之外，大荒之隅，有山而不合，名曰不周。</div>
       </header>
       <ul id="second-level">
-        <li onclick="hideMenu('/vue')">网站导航</li>
-        <li onclick="hideMenu('/vue3')">电影资源</li>
-        <li onclick="hideMenu('/react16')">视频直播</li>
-        <li onclick="hideMenu('/purehtml')">概览页</li>
+        <li id="second-level-vue" onclick="hideMenu('/vue')">网站导航</li>
+        <li id="second-level-vue3" onclick="hideMenu('/vue3')">电影资源</li>
+        <li id="second-level-react16" onclick="hideMenu('/react16')">视频直播</li>
+        <li id="second-level-purehtml" onclick="hideMenu('/purehtml')">概览页</li>
       </ul>
       <div class="mainapp-main">
         <!-- 侧边栏 -->
 
         <!-- 子应用  -->
         <div id="right-content">
-          <!-- <main id="subapp-container"></main> -->
+          <main id="subapp-container"></main>
         </div>
       </div>
       <div class="footer">
@@ -67,17 +62,39 @@
       function push(subapp) {
         history.pushState(null, subapp, subapp);
       }
-
       function showMenu() {
         const showStatus = document.getElementById('second-level').style.display;
         document.getElementById('second-level').style.display = showStatus === 'block' ? 'none' : 'block';
-        // document.getElementById('second-level').style.display = 'block';
       }
       function hideMenu(path) {
         document.getElementById('second-level').style.display = 'none';
         push(path);
       }
+      setActive();
+      window.addEventListener('popstate', function (event) {
+        setActive();
+      });
+
+      function setActive() {
+        const urlSet = ['/vue3', '/vue', '/react16', '/purehtml'];
+        const urlIndex = urlSet.findIndex((item) => location.href?.includes(item));
+        if (urlIndex !== -1) {
+          const activeColor = 'rgb(103,163,103)';
+          const normalColor = 'inherit';
+          urlSet.forEach((item) => {
+            const urlStr = item.replace(/\//g, '');
+            const activeStr = urlSet[urlIndex];
+            document.getElementById(`second-level-` + urlStr).style.backgroundColor =
+              item === activeStr ? activeColor : normalColor;
+            document.getElementById(`mainapp-sidemenu-` + urlStr).style.backgroundColor =
+              item === activeStr ? activeColor : normalColor;
+          });
+        } else {
+          return;
+        }
+      }
     </script>
+    <script></script>
     <script>
       var _hmt = _hmt || [];
       (function () {
