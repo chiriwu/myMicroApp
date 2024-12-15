@@ -3,10 +3,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import store from './store';
+import { Provider } from 'react-redux';
 
 function render(props) {
   const { container } = props;
-  ReactDOM.render(<App />, container ? container.querySelector('#root') : document.querySelector('#root'));
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    container ? container.querySelector('#root') : document.querySelector('#root'),
+  );
 }
 
 function storeTest(props) {
