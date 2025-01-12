@@ -77,23 +77,22 @@ class DefaultLayout extends Component {
   }
 
   render() {
-    // let { menuClick, menuToggle } = this.props;
-    const menuToggle = true;
-    const menuClick = () => { }
-    let { auth } = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : '';
-    debugger;
+    let { menuClick, menuToggle } = this.props;
+    // const menuToggle = true;
+    // const menuClick = () => { }
+    // let { auth } = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : '';
     return (
       <Layout className="app">
         {/* <BackTop /> */}
         <AppAside menuToggle={menuToggle} menu={this.state.menu} />
-        <Layout style={{ marginLeft: menuToggle ? '80px' : '200px', minHeight: '100vh' }}>
-          <AppHeader
+        <Layout style={{ minHeight: '100vh', marginLeft: '10px' }}>
+          {/* <AppHeader
             menuToggle={menuToggle}
             menuClick={menuClick}
             avatar={this.state.avatar}
             show={this.state.show}
             loginOut={this.loginOut}
-          />
+          /> */}
           <Content className="content">
             <Switch>
               {routes.map((item) => {
@@ -102,15 +101,16 @@ class DefaultLayout extends Component {
                     key={item.path}
                     path={item.path}
                     exact={item.exact}
-                    render={(props) =>
-                      !auth ? (
-                        <item.component {...props} />
-                      ) : item.auth && item.auth.indexOf(auth) !== -1 ? (
-                        <item.component {...props} />
-                      ) : (
-                        // 这里也可以跳转到 403 页面
-                        <Redirect to="/404" {...props} />
-                      )
+                    render={
+                      (props) => <item.component {...props} />
+                      // !auth ? (
+                      //   <item.component {...props} />
+                      // ) : item.auth && item.auth.indexOf(auth) !== -1 ? (
+                      //   <item.component {...props} />
+                      // ) : (
+                      //   // 这里也可以跳转到 403 页面
+                      //   <Redirect to="/404" {...props} />
+                      // )
                     }
                   ></Route>
                 );
@@ -118,7 +118,7 @@ class DefaultLayout extends Component {
               <Redirect to="/404" />
             </Switch>
           </Content>
-          <AppFooter />
+          {/* <AppFooter /> */}
         </Layout>
       </Layout>
     );
@@ -135,7 +135,5 @@ const dispatchToProp = (dispatch) => ({
   },
 });
 
-
-
-// export default withRouter(connect(stateToProp, dispatchToProp)(DefaultLayout));
-export default withRouter(DefaultLayout);
+export default withRouter(connect(stateToProp, dispatchToProp)(DefaultLayout));
+// export default withRouter(DefaultLayout);

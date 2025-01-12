@@ -46,10 +46,13 @@ export default function () {
       width: '100%',
     });
   };
+  useEffect(() => {
+    player.src = testUrlList[curIndex];
+  }, [curIndex]);
+
   const toggleVideoUrl = function (index) {
     if (player) {
       setCurIndex(index);
-      player.src = testUrlList[curIndex];
     }
   };
 

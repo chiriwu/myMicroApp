@@ -32,9 +32,14 @@ const RouteExample = () => {
   const Component = lazy(() => import(`./${current}`));
 
   return (
-    
     <>
-      <Menu style={{ width: '100%' }} onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
+      <Menu
+        style={{ width: '100%', borderRadius: '5px' }}
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={items}
+      />
       <Suspense fallback={null}>
         <Component></Component>
       </Suspense>

@@ -28,7 +28,7 @@ export default function () {
         el: document.querySelector('#' + id),
         url,
         pip: true,
-        width: '50%',
+        width: '100%',
         height: '100%',
       });
     } else if (HlsPlugin.isSupported()) {
@@ -39,7 +39,7 @@ export default function () {
         url, // hls 流地址
         pip: true,
         plugins: [HlsPlugin], // 第二步
-        width: '50%',
+        width: '100%',
         height: '100%',
       });
     }
@@ -67,12 +67,12 @@ export default function () {
     <div id="allLive" className={style.liveContainer}>
       <div id="player"></div>
       <div>
-        <div>
+        <div className={style.opeartion}>
           <Input
             onChange={(e) => {
               setLiveUrl(e.target.value);
             }}
-            style={{ width: '400px', marginBottom: '5px', marginRight: '5px' }}
+            style={{ width: '500px', marginBottom: '5px', marginRight: '5px', height: '100px' }}
             addonBefore="推流m3u8地址:"
             value={liveUrl}
           />
@@ -82,25 +82,25 @@ export default function () {
             }}
             type="primary"
           >
-            添加一个直播间
+            添加直播间
           </Button>
         </div>
         {maxLiveNum > 1 && (
-          <div>
+          <div className={style.opeartion}>
             <InputNumber
               onChange={(v) => {
                 setLiveOrder(v);
               }}
               max={maxLiveNum}
               min={2}
-              style={{ width: '200px', marginRight: '5px', marginBottom: '5px' }}
+              style={{ width: '300px', marginRight: '5px', marginBottom: '5px' }}
               addonBefore="第"
               addonAfter="个"
               value={liveOrder}
               defaultValue="0"
             />
             <Button onClick={deleteOneLive} type="primary">
-              删除一个直播间
+              删除直播间
             </Button>
           </div>
         )}
