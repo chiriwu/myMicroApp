@@ -3,7 +3,7 @@ import loadable from '../utils/loadable';
 const Index = loadable(() => import(/* webpackChunkName: 'index' */ '../pages/Media'));
 
 // // 通用
-// const ButtonView = loadable(() => import(/* webpackChunkName: 'button' */ '@/views/PublicView/Button'));
+const TodoList = loadable(() => import(/* webpackChunkName: 'button' */ '../pages/TodoList/index'));
 // const IconView = loadable(() => import(/* webpackChunkName: 'icon' */ '@/views/PublicView/Icon'));
 
 // // 导航
@@ -32,7 +32,7 @@ const Index = loadable(() => import(/* webpackChunkName: 'index' */ '../pages/Me
 
 const routes = [
   { path: '/index', exact: true, name: 'Index', component: Index },
-  //   { path: '/public/button', exact: false, name: '按钮', component: ButtonView, auth: [1] },
+    { path: '/public/button', exact: false, name: '按钮', component: TodoList },
   //   { path: '/public/icon', exact: false, name: '图标', component: IconView, auth: [1] },
   //   { path: '/nav/dropdown', exact: false, name: '下拉菜单', component: DropdownView },
   //   { path: '/nav/menu', exact: false, name: '下拉菜单', component: MenuView },
