@@ -33,6 +33,9 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
   }[] = [];
   useEffect(() => {
     copyLocalContent = localContent;
+    if (copyLocalContent.length && copyLocalContent[copyLocalContent.length - 1]?.text === '' && refs.current) {
+      refs.current[refs.current.length - 1]?.focus();
+    }
   }, [localContent]);
   const setItemContent = (
     index: number,
@@ -51,6 +54,15 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
     console.log('ref=', refs.current.length);
     // refs.current[refs.current.length - 1].focus();
   };
+  const checkIfEmpty = () => {
+    console.log('isEmpty');
+    copyLocalContent.forEach((item, index) => {
+      if (item.text === '') {
+        copyLocalContent.splice(index, 1);
+      }
+    });
+    setContent([...copyLocalContent]);
+  };
   return (
     <div style={style}>
       {localContent.map((item, index) => {
@@ -58,6 +70,7 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
           <TodoItem
             contentItem={item}
             setItemContent={setItemContent}
+            checkIfEmpty={checkIfEmpty}
             index={index}
             key={index}
             style={{ height: '24px' }}

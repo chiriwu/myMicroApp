@@ -16,11 +16,17 @@ const TodoList = () => {
       status: boolean;
     }[]
   >([]);
+
   const defaultKey = '7days';
+  const [contentKey, setContentKey] = React.useState<string>(defaultKey);
   useEffect(() => {
-    const content = localStorage.getItem(defaultKey) && JSON.parse(localStorage.getItem(defaultKey) || '[]');
+    const content = localStorage.getItem(contentKey) && JSON.parse(localStorage.getItem(contentKey) || '[]');
     setContent(content || []);
-  }, []);
+  }, [contentKey]);
+  useEffect(() => {
+    localStorage.setItem(contentKey, JSON.stringify(localContent));
+  }, [localContent]);
+
   return (
     <div style={containerStyle}>
       <CategoryItem style={{ width: '200px' }}></CategoryItem>
