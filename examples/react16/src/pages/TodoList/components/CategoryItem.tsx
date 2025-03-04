@@ -6,61 +6,46 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 interface categoryItemType {
   style?: React.CSSProperties;
+  setContentKey: (key: string) => void;
 }
-const CategoryItem: React.FC<categoryItemType> = ({ style }) => {
+const CategoryItem: React.FC<categoryItemType> = ({ style, setContentKey }) => {
   const items: MenuItem[] = [
     {
       key: 'sub1',
       icon: <MailOutlined />,
-      label: 'Navigation One',
+      label: '待办',
       children: [
-        {
-          key: '1-1',
-          label: 'Item 1',
-          type: 'group',
-          children: [
-            { key: '1', label: 'Option 1' },
-            { key: '2', label: 'Option 2' },
-          ],
-        },
-        {
-          key: '1-2',
-          label: 'Item 2',
-          type: 'group',
-          children: [
-            { key: '3', label: 'Option 3' },
-            { key: '4', label: 'Option 4' },
-          ],
-        },
+        { key: 'today', label: '今天' },
+        { key: '7days', label: '七天内' },
       ],
     },
     {
       key: 'sub2',
       icon: <AppstoreOutlined />,
-      label: 'Navigation Two',
+      label: '更多',
       children: [
         { key: '5', label: 'Option 5' },
         { key: '6', label: 'Option 6' },
-        {
-          key: 'sub3',
-          label: 'Submenu',
-          children: [
-            { key: '7', label: 'Option 7' },
-            { key: '8', label: 'Option 8' },
-          ],
-        },
       ],
     },
   ];
 
-  const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click', e);
+  const onClick: MenuProps['onClick'] = ({ item, key, keyPath, domEvent }) => {
+    console.log('click ', item, key, keyPath, domEvent);
+    setContentKey(key); // update content based on the selected key
+    // your code here
   };
-
+  const addProject = () => {
+    console.log('addProject');
+  };
   return (
     <div style={style}>
-      <Menu onClick={onClick} mode="inline" items={items} />
-      <Button>新增项目</Button>
+      <Menu onClick={onClick} mode="inline" items={items} defaultSelectedKeys={['today']} defaultOpenKeys={['sub1']} />
+      <div style={{ marginTop: '16px', textAlign: 'left' }}>
+        <Button type="primary" onClick={addProject}>
+          新增项目
+        </Button>
+      </div>
     </div>
   );
 };

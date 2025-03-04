@@ -29,7 +29,10 @@ const TodoList = () => {
 
   return (
     <div style={containerStyle}>
-      <CategoryItem style={{ width: '200px' }}></CategoryItem>
+      <CategoryItem
+        style={{ width: '200px', borderRight: '3px solid #eee', height: '100%' }}
+        setContentKey={setContentKey}
+      ></CategoryItem>
       <TodoContent
         setContent={setContent}
         localContent={localContent}

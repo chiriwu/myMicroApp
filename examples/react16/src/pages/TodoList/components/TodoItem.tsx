@@ -1,5 +1,5 @@
 import React, { useEffect, forwardRef, useState, useRef, HTMLElementType, useImperativeHandle } from 'react';
-import { Checkbox } from 'antd';
+import { Checkbox, Popover } from 'antd';
 import type { CheckboxProps } from 'antd';
 interface TodoItemProps {
   style?: React.CSSProperties;
@@ -8,10 +8,12 @@ interface TodoItemProps {
   setItemContent: (index: number, obj: { text: string; status: boolean }) => void;
   ref: any;
   checkIfEmpty: () => void;
+  deleteCurItem: () => void;
 }
 const TodoItem: React.FC<TodoItemProps> = forwardRef(
-  ({ style, index, contentItem, setItemContent, checkIfEmpty }, ref) => {
+  ({ style, index, contentItem, setItemContent, checkIfEmpty, deleteCurItem }, ref) => {
     const [isEditStatus, setIsEditStatus] = useState(false);
+    const [open, setOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
       console.log('object');
@@ -45,19 +47,48 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
       setIsEditStatus(false);
       checkIfEmpty();
     };
+    const handleOpenChange = (open: boolean) => {
+      setOpen(open);
+    };
+    const deleteContent = () => {
+      deleteCurItem();
+      setOpen(false);
+    };
+    const OpenContent = () => {
+      return (
+        <>
+          <a onClick={deleteContent}>删除</a>
+        </>
+      );
+    };
     return (
       <div style={style}>
         <Checkbox
           onChange={onStautsChange}
-          style={{ width: '24px', height: '24px' }}
+          style={{ width: '36px', height: '36px' }}
           checked={contentItem.status}
         ></Checkbox>
         {isEditStatus ? (
-          <input value={contentItem.text} ref={inputRef} onChange={onTextChange} onBlur={exitInput}></input>
+          <input
+            value={contentItem.text}
+            ref={inputRef}
+            onChange={onTextChange}
+            onBlur={exitInput}
+            style={{ fontSize: '28px' }}
+          ></input>
         ) : (
-          <label onClick={() => setIsEditStatus(true)} style={{ marginLeft: '12px' }}>
-            {contentItem.text}
-          </label>
+          <Popover
+            content={OpenContent}
+            title="操作"
+            trigger="contextMenu"
+            placement="top"
+            open={open}
+            onOpenChange={handleOpenChange}
+          >
+            <label onClick={() => setIsEditStatus(true)} style={{ marginLeft: '12px' }}>
+              {contentItem.text}
+            </label>
+          </Popover>
         )}
       </div>
     );

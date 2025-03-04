@@ -63,6 +63,10 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
     });
     setContent([...copyLocalContent]);
   };
+  const deleteCurItem = (index: number) => {
+    copyLocalContent.splice(index, 1);
+    setContent([...copyLocalContent]);
+  };
   return (
     <div style={style}>
       {localContent.map((item, index) => {
@@ -71,9 +75,10 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
             contentItem={item}
             setItemContent={setItemContent}
             checkIfEmpty={checkIfEmpty}
+            deleteCurItem={() => deleteCurItem(index)}
             index={index}
             key={index}
-            style={{ height: '24px' }}
+            style={{ minHeight: '36px', padding: '16px', fontSize: '28px', border: '1px solid #eee' }}
             ref={(el: any) => (refs.current[index] = el)}
           ></TodoItem>
         );
