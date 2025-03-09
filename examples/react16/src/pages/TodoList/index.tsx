@@ -8,6 +8,7 @@ const containerStyle = {
   justifyContent: 'flex-start',
   alignItem: 'center',
   margin: '12px',
+  fontSize: '28px',
 };
 const TodoList = () => {
   const [localContent, setContent] = React.useState<
@@ -17,7 +18,7 @@ const TodoList = () => {
     }[]
   >([]);
 
-  const defaultKey = '7days';
+  const defaultKey = 'today';
   const [contentKey, setContentKey] = React.useState<string>(defaultKey);
   useEffect(() => {
     const content = localStorage.getItem(contentKey) && JSON.parse(localStorage.getItem(contentKey) || '[]');
@@ -31,6 +32,7 @@ const TodoList = () => {
     <div style={containerStyle}>
       <CategoryItem
         style={{ width: '200px', borderRight: '3px solid #eee', height: '100%' }}
+        defaultKey={defaultKey}
         setContentKey={setContentKey}
       ></CategoryItem>
       <TodoContent

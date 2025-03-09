@@ -1,6 +1,8 @@
 import React, { useEffect, forwardRef, useState, useRef, HTMLElementType, useImperativeHandle } from 'react';
 import { Checkbox, Popover } from 'antd';
 import type { CheckboxProps } from 'antd';
+import TodoItemStyle from '../style/TodoItem.module.scss';
+
 interface TodoItemProps {
   style?: React.CSSProperties;
   contentItem: { text: string; status: boolean };
@@ -62,10 +64,10 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
       );
     };
     return (
-      <div style={style}>
+      <div style={style} className={TodoItemStyle.container}>
         <Checkbox
           onChange={onStautsChange}
-          style={{ width: '36px', height: '36px' }}
+          style={{ width: '36px', height: '36px', marginRight: '12px' }}
           checked={contentItem.status}
         ></Checkbox>
         {isEditStatus ? (

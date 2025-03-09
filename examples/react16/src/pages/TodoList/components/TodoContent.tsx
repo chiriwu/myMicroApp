@@ -78,12 +78,20 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
             deleteCurItem={() => deleteCurItem(index)}
             index={index}
             key={index}
-            style={{ minHeight: '36px', padding: '16px', fontSize: '28px', border: '1px solid #eee' }}
+            style={{
+              minHeight: '36px',
+              padding: '16px',
+              fontSize: '28px',
+              border: '1px solid #eee',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
             ref={(el: any) => (refs.current[index] = el)}
           ></TodoItem>
         );
       })}
-      <Button type="primary" onClick={AddNewItem} style={{ marginTop: '16px' }}>
+      <Button type="primary" onClick={AddNewItem} style={{ marginTop: '16px', fontSize: '22px', height: 'auto' }}>
         新增
       </Button>
     </div>
