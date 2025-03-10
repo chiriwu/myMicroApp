@@ -42,6 +42,26 @@ const TodoList = () => {
     newContent[labelKey] = arr;
     localStorage.setItem(uniqueKey, JSON.stringify(newContent));
   };
+  const importData = (str: string) => {
+    console.log('sfdsaf=', str);
+    localStorage.setItem(uniqueKey, str);
+  };
+  const downLoadLocal = () => {
+    // 将变量序列化为JSON字符串
+    const jsonString = JSON.stringify(localStorage.getItem(uniqueKey), null, 2);
+    // 创建一个Blob对象
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    // 设置下载属性
+    link.href = url;
+    link.download = 'data.json';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
   return (
     <div style={containerStyle}>
       <CategoryItem
@@ -50,6 +70,8 @@ const TodoList = () => {
         setContentKey={setContentKey}
         defaultLabelKeyList={defaultLabelKeyList}
         setLabelKeyList={setLabelKeyList}
+        downLoadLocal={downLoadLocal}
+        importData={importData}
       ></CategoryItem>
       <TodoContent
         setContent={setContent}

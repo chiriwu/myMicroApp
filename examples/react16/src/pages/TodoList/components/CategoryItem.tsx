@@ -35,6 +35,8 @@ interface categoryItemType {
   defaultKey: string;
   defaultLabelKeyList: { key: string; label: string }[];
   setLabelKeyList: (arr: { key: string; label: string }[]) => void;
+  downLoadLocal: () => void;
+  importData: (str: string) => void;
 }
 const CategoryItem: React.FC<categoryItemType> = ({
   style,
@@ -42,6 +44,8 @@ const CategoryItem: React.FC<categoryItemType> = ({
   defaultKey,
   defaultLabelKeyList,
   setLabelKeyList,
+  downLoadLocal,
+  importData,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [projectName, setProjectName] = useState('');
@@ -80,7 +84,9 @@ const CategoryItem: React.FC<categoryItemType> = ({
         const reader = new FileReader();
         reader.readAsText(file);
         reader.onload = () => {
+          importData(reader.result as string);
           console.log('reader.result=', reader.result);
+          console.log('reader.result=', JSON.parse(reader.result as string));
         };
       });
     },
@@ -90,9 +96,8 @@ const CategoryItem: React.FC<categoryItemType> = ({
     // console.log(e);
     // message.success('Click on Yes');
   };
-  const downLoadLocal = () => {};
+
   const deleteProject = () => {};
-  const importData = () => {};
 
   return (
     <div style={style}>
@@ -133,13 +138,13 @@ const CategoryItem: React.FC<categoryItemType> = ({
         </Tooltip>
         <Tooltip title="上传到云端">
           <Upload {...importUploadProps}>
-            <UploadOutlined onClick={importData} />
+            <UploadOutlined />
           </Upload>
         </Tooltip>
         <Tooltip title="删除项目">
           <Popconfirm
             title={'删除当前项目'}
-            description="是否确认删除当前项目?"
+            description={<Button>TR</Button>}
             onConfirm={confirm}
             okText="确认"
             cancelText="取消"
