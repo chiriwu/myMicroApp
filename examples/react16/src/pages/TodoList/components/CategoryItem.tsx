@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Menu, Button, Modal, Input, message } from 'antd';
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  SettingOutlined,
+  DownloadOutlined,
+  DeleteOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
+import type { MenuProps, UploadProps } from 'antd';
+import { Menu, Button, Modal, Input, message, Tooltip, Popconfirm, Upload } from 'antd';
 type MenuItem = Required<MenuProps>['items'][number];
 
 const initItems: MenuItem[] = [
@@ -26,13 +33,22 @@ interface categoryItemType {
   style?: React.CSSProperties;
   setContentKey: (key: string) => void;
   defaultKey: string;
+  defaultLabelKeyList: { key: string; label: string }[];
+  setLabelKeyList: (arr: { key: string; label: string }[]) => void;
 }
-const CategoryItem: React.FC<categoryItemType> = ({ style, setContentKey, defaultKey }) => {
+const CategoryItem: React.FC<categoryItemType> = ({
+  style,
+  setContentKey,
+  defaultKey,
+  defaultLabelKeyList,
+  setLabelKeyList,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [projectName, setProjectName] = useState('');
   const [openKey, setOpenKey] = useState(['sub1']);
   const [items, setItem] = useState<MenuItem[]>([]);
   useEffect(() => {
+    (initItems[1] as any).children = defaultLabelKeyList;
     setItem(initItems);
   }, []);
 
@@ -50,12 +66,44 @@ const CategoryItem: React.FC<categoryItemType> = ({ style, setContentKey, defaul
     (newItems[1] as any).children?.push({ key, label: projectName });
     console.log('newItem=', newItems);
     setItem([...newItems]);
+    setLabelKeyList([...(newItems[1] as any).children]);
     setOpenKey(['sub1', 'sub2']);
     setModalOpen(false);
   };
+  const onOpenChange: MenuProps['onOpenChange'] = (key) => {
+    console.log('openkey', key);
+    setOpenKey(key);
+  };
+  const importUploadProps: UploadProps = {
+    beforeUpload(file: any, fileList: any) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = () => {
+          console.log('reader.result=', reader.result);
+        };
+      });
+    },
+  };
+
+  const confirm = (e: any) => {
+    // console.log(e);
+    // message.success('Click on Yes');
+  };
+  const downLoadLocal = () => {};
+  const deleteProject = () => {};
+  const importData = () => {};
+
   return (
     <div style={style}>
-      <Menu onClick={onClick} mode="inline" items={items} defaultSelectedKeys={[defaultKey]} openKeys={openKey} />
+      <Menu
+        onClick={onClick}
+        mode="inline"
+        items={items}
+        defaultSelectedKeys={[defaultKey]}
+        openKeys={openKey}
+        onOpenChange={onOpenChange}
+      />
       <div style={{ marginTop: '16px', textAlign: 'left', fontSize: '28px' }}>
         <Button
           type="primary"
@@ -67,6 +115,39 @@ const CategoryItem: React.FC<categoryItemType> = ({ style, setContentKey, defaul
         >
           新增项目
         </Button>
+      </div>
+      <div
+        style={{
+          textAlign: 'left',
+          fontSize: '28px',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          backgroundColor: '#eee',
+          padding: '12px',
+          borderRadius: '8px',
+        }}
+      >
+        <Tooltip title="下载到本地">
+          <DownloadOutlined onClick={downLoadLocal} />
+        </Tooltip>
+        <Tooltip title="上传到云端">
+          <Upload {...importUploadProps}>
+            <UploadOutlined onClick={importData} />
+          </Upload>
+        </Tooltip>
+        <Tooltip title="删除项目">
+          <Popconfirm
+            title={'删除当前项目'}
+            description="是否确认删除当前项目?"
+            onConfirm={confirm}
+            okText="确认"
+            cancelText="取消"
+            placement="right"
+          >
+            <DeleteOutlined onClick={deleteProject} />
+          </Popconfirm>
+        </Tooltip>
       </div>
       {modalOpen && (
         <Modal

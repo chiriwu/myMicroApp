@@ -34,7 +34,7 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
   useEffect(() => {
     copyLocalContent = localContent;
     if (copyLocalContent.length && copyLocalContent[copyLocalContent.length - 1]?.text === '' && refs.current) {
-      refs.current[refs.current.length - 1]?.focus();
+      refs.current[copyLocalContent.length - 1]?.focus();
     }
   }, [localContent]);
   const setItemContent = (
@@ -69,7 +69,7 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
   };
   return (
     <div style={style}>
-      {localContent.map((item, index) => {
+      {localContent?.map((item, index) => {
         return (
           <TodoItem
             contentItem={item}

@@ -1,7 +1,8 @@
 import React, { useEffect, forwardRef, useState, useRef, HTMLElementType, useImperativeHandle } from 'react';
-import { Checkbox, Popover } from 'antd';
+import { Checkbox, Popover, Input } from 'antd';
 import type { CheckboxProps } from 'antd';
 import TodoItemStyle from '../style/TodoItem.module.scss';
+const { TextArea } = Input;
 
 interface TodoItemProps {
   style?: React.CSSProperties;
@@ -71,13 +72,14 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
           checked={contentItem.status}
         ></Checkbox>
         {isEditStatus ? (
-          <input
+          <TextArea
             value={contentItem.text}
             ref={inputRef}
             onChange={onTextChange}
             onBlur={exitInput}
-            style={{ fontSize: '28px' }}
-          ></input>
+            style={{ fontSize: '28px', width: '100%' }}
+            autoSize
+          ></TextArea>
         ) : (
           <Popover
             content={OpenContent}
@@ -87,7 +89,7 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
             open={open}
             onOpenChange={handleOpenChange}
           >
-            <label onClick={() => setIsEditStatus(true)} style={{ marginLeft: '12px' }}>
+            <label onClick={() => setIsEditStatus(true)} style={{ marginLeft: '12px', lineHeight: '51px' }}>
               {contentItem.text}
             </label>
           </Popover>
