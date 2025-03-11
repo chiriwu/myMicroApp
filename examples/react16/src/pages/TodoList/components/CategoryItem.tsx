@@ -37,6 +37,7 @@ interface categoryItemType {
   setLabelKeyList: (arr: { key: string; label: string }[]) => void;
   downLoadLocal: () => void;
   importData: (str: string) => void;
+  deleteCurKey: () => void;
 }
 const CategoryItem: React.FC<categoryItemType> = ({
   style,
@@ -46,6 +47,7 @@ const CategoryItem: React.FC<categoryItemType> = ({
   setLabelKeyList,
   downLoadLocal,
   importData,
+  deleteCurKey,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [projectName, setProjectName] = useState('');
@@ -92,9 +94,10 @@ const CategoryItem: React.FC<categoryItemType> = ({
     },
   };
 
-  const confirm = (e: any) => {
+  const confirmDelete = (e: any) => {
     // console.log(e);
     // message.success('Click on Yes');
+    deleteCurKey();
   };
 
   const deleteProject = () => {};
@@ -144,8 +147,8 @@ const CategoryItem: React.FC<categoryItemType> = ({
         <Tooltip title="删除项目">
           <Popconfirm
             title={'删除当前项目'}
-            description={<Button>TR</Button>}
-            onConfirm={confirm}
+            description={'是否删除当前项目，删除前可以先下载到本地保存'}
+            onConfirm={confirmDelete}
             okText="确认"
             cancelText="取消"
             placement="right"

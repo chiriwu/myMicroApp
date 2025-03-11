@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import CategoryItem from './components/CategoryItem';
 import TodoContent from './components/TodoContent';
+import { message } from 'antd';
 
 const containerStyle = {
   display: 'flex',
@@ -45,10 +46,15 @@ const TodoList = () => {
   const importData = (str: string) => {
     console.log('sfdsaf=', str);
     localStorage.setItem(uniqueKey, str);
+
+    const uniqueData = localStorage.getItem(uniqueKey);
+    const contentData = JSON.parse(uniqueData || '{}');
+    console.log('object', uniqueData, contentData);
+    setContent(contentData[contentKey] || []);
   };
   const downLoadLocal = () => {
     // 将变量序列化为JSON字符串
-    const jsonString = JSON.stringify(localStorage.getItem(uniqueKey), null, 2);
+    const jsonString = localStorage.getItem(uniqueKey) || '{}';
     // 创建一个Blob对象
     const blob = new Blob([jsonString], { type: 'application/json' });
     const link = document.createElement('a');
@@ -62,6 +68,22 @@ const TodoList = () => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
+  const deleteCurKey = () => {
+    if (['today', '7days'].includes(contentKey)) {
+      return message.warning('当前项目不能删除');
+    }
+    let newContent = JSON.parse(localStorage.getItem(uniqueKey) || '{}');
+    const keyIndex = newContent[labelKey].findIndex((item: any) => item.key === contentKey);
+    console.log('keyIndex', keyIndex);
+    if (keyIndex !== -1) {
+      delete newContent[contentKey];
+      console.log('labelKey', newContent);
+      newContent[labelKey].splice(keyIndex, 1);
+      console.log('labelKey1', newContent);
+      localStorage.setItem(uniqueKey, JSON.stringify(newContent));
+      setContentKey(defaultKey);
+    }
+  };
   return (
     <div style={containerStyle}>
       <CategoryItem
@@ -72,6 +94,7 @@ const TodoList = () => {
         setLabelKeyList={setLabelKeyList}
         downLoadLocal={downLoadLocal}
         importData={importData}
+        deleteCurKey={deleteCurKey}
       ></CategoryItem>
       <TodoContent
         setContent={setContent}
