@@ -32,9 +32,9 @@ const initItems: MenuItem[] = [
 interface categoryItemType {
   style?: React.CSSProperties;
   setContentKey: (key: string) => void;
-  defaultKey: string;
-  defaultLabelKeyList: { key: string; label: string }[];
-  setLabelKeyList: (arr: { key: string; label: string }[]) => void;
+  selectedKeys: string;
+  LabelKeyList: { key: string; label: string }[];
+  saveLabelKeyList: (arr: { key: string; label: string }[]) => void;
   downLoadLocal: () => void;
   importData: (str: string) => void;
   deleteCurKey: () => void;
@@ -42,9 +42,9 @@ interface categoryItemType {
 const CategoryItem: React.FC<categoryItemType> = ({
   style,
   setContentKey,
-  defaultKey,
-  defaultLabelKeyList,
-  setLabelKeyList,
+  selectedKeys,
+  LabelKeyList,
+  saveLabelKeyList,
   downLoadLocal,
   importData,
   deleteCurKey,
@@ -53,10 +53,11 @@ const CategoryItem: React.FC<categoryItemType> = ({
   const [projectName, setProjectName] = useState('');
   const [openKey, setOpenKey] = useState(['sub1']);
   const [items, setItem] = useState<MenuItem[]>([]);
+
   useEffect(() => {
-    (initItems[1] as any).children = defaultLabelKeyList;
+    (initItems[1] as any).children = LabelKeyList;
     setItem(initItems);
-  }, []);
+  }, [LabelKeyList]);
 
   const onClick: MenuProps['onClick'] = ({ item, key, keyPath, domEvent }) => {
     console.log('click ', item, key, keyPath, domEvent);
@@ -72,7 +73,7 @@ const CategoryItem: React.FC<categoryItemType> = ({
     (newItems[1] as any).children?.push({ key, label: projectName });
     console.log('newItem=', newItems);
     setItem([...newItems]);
-    setLabelKeyList([...(newItems[1] as any).children]);
+    saveLabelKeyList([...(newItems[1] as any).children]);
     setOpenKey(['sub1', 'sub2']);
     setModalOpen(false);
   };
@@ -108,7 +109,7 @@ const CategoryItem: React.FC<categoryItemType> = ({
         onClick={onClick}
         mode="inline"
         items={items}
-        defaultSelectedKeys={[defaultKey]}
+        selectedKeys={[selectedKeys]}
         openKeys={openKey}
         onOpenChange={onOpenChange}
       />

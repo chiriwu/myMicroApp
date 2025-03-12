@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CategoryItem from './components/CategoryItem';
 import TodoContent from './components/TodoContent';
 import { message } from 'antd';
@@ -24,7 +24,13 @@ const TodoList = () => {
   >([]);
 
   const [contentKey, setContentKey] = React.useState<string>(defaultKey);
-  const defaultLabelKeyList = JSON.parse(localStorage.getItem(uniqueKey) || '{}')?.[labelKey as any] || [];
+  const [selectedKeys, setSelectedKeys] = useState(defaultKey);
+  const [LabelKeyList, setLabelKeyList] = useState(
+    JSON.parse(localStorage.getItem(uniqueKey) || '{}')?.[labelKey as any] || [],
+  );
+  // useEffect(() => {
+  //   setContentKey(selectedKeys);
+  // }, [selectedKeys]);
   useEffect(() => {
     const uniqueData = localStorage.getItem(uniqueKey);
     const contentData = JSON.parse(uniqueData || '{}');
@@ -38,7 +44,7 @@ const TodoList = () => {
     newContent[contentKey] = localContent;
     localStorage.setItem(uniqueKey, JSON.stringify(newContent));
   }, [localContent]);
-  const setLabelKeyList = (arr: any) => {
+  const saveLabelKeyList = (arr: any) => {
     let newContent = JSON.parse(localStorage.getItem(uniqueKey) || '{}');
     newContent[labelKey] = arr;
     localStorage.setItem(uniqueKey, JSON.stringify(newContent));
@@ -82,16 +88,18 @@ const TodoList = () => {
       console.log('labelKey1', newContent);
       localStorage.setItem(uniqueKey, JSON.stringify(newContent));
       setContentKey(defaultKey);
+      setSelectedKeys(defaultKey);
+      setLabelKeyList(newContent[labelKey]);
     }
   };
   return (
     <div style={containerStyle}>
       <CategoryItem
         style={{ width: '200px', borderRight: '3px solid #eee', height: '100%' }}
-        defaultKey={defaultKey}
+        selectedKeys={selectedKeys}
         setContentKey={setContentKey}
-        defaultLabelKeyList={defaultLabelKeyList}
-        setLabelKeyList={setLabelKeyList}
+        LabelKeyList={LabelKeyList}
+        saveLabelKeyList={saveLabelKeyList}
         downLoadLocal={downLoadLocal}
         importData={importData}
         deleteCurKey={deleteCurKey}
