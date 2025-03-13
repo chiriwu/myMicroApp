@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Tag } from 'antd';
 import Player from 'xgplayer';
 import 'xgplayer/dist/index.min.css';
-import style from './Video.module.css';
+import style from './style/Video.module.css';
 
 const testUrlList = [
   'https://stream7.iqilu.com/10339/upload_transcode/202002/18/20200218114723HDu3hhxqIT.mp4',

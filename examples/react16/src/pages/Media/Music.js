@@ -3,7 +3,7 @@ import { Input, Button } from 'antd';
 import Player from 'xgplayer';
 import MusicPreset, { Lyric, Analyze } from 'xgplayer-music';
 import 'xgplayer/dist/index.min.css';
-import './Music.css';
+import './style/Music.css';
 let player = null;
 export default function () {
   const [musicUrl, setMusicUrl] = useState(null);

@@ -4,7 +4,7 @@ import FlvPlugin from 'xgplayer-flv';
 import Player from 'xgplayer';
 import HlsPlugin from 'xgplayer-hls';
 import 'xgplayer/dist/index.min.css';
-import style from './Live.module.css';
+import style from './style/Live.module.css';
 
 const defaultUrl = 'http://220.161.87.62:8800/hls/0/index.m3u8';
 export default function () {

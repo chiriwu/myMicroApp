@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import CategoryItem from './components/CategoryItem';
-import TodoContent from './components/TodoContent';
+import CategoryItem from '@/pages/TodoList/components/CategoryItem';
+import TodoContent from '@/pages/TodoList/components/TodoContent';
 import { message } from 'antd';
-import { deepMerge } from '../../utils';
+import { deepMerge } from '@/utils';
 
 const containerStyle = {
   display: 'flex',

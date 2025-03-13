@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 import { PlayCircleOutlined, CaretRightOutlined, StepForwardOutlined } from '@ant-design/icons';
 
 // import 'antd/dist/antd.min.css';
-import '../App.css';
+// import '../App.css';
 const items = [
   {
     label: '直播',
