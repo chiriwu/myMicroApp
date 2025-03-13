@@ -10,22 +10,6 @@ interface TodoContentProps {
   setContent: Function;
 }
 const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setContent }) => {
-  // const [content, setContent] = useState<
-  //   {
-  //     text: string;
-  //     status: boolean;
-  //   }[]
-  // >([]);
-  // useEffect(() => {
-  //   // const localContent = localStorage.getItem('list')
-  //   const localContent = [
-  //     {
-  //       text: '加入',
-  //       status: false,
-  //     },
-  //   ];
-  //   setContent(localContent);
-  // }, []);
   const refs = useRef<HTMLInputElement[]>([]);
   let copyLocalContent: {
     text: string;
@@ -49,13 +33,8 @@ const TodoContent: React.FC<TodoContentProps> = ({ style, localContent, setConte
   };
   const AddNewItem = () => {
     setContent([...copyLocalContent, { text: '', status: false }]);
-    console.log('content', copyLocalContent);
-    console.log('refs', refs);
-    console.log('ref=', refs.current.length);
-    // refs.current[refs.current.length - 1].focus();
   };
   const checkIfEmpty = () => {
-    console.log('isEmpty');
     copyLocalContent.forEach((item, index) => {
       if (item.text === '') {
         copyLocalContent.splice(index, 1);

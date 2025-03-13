@@ -19,17 +19,14 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
     const [open, setOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
-      console.log('object');
       inputRef.current?.focus();
     }, [isEditStatus]);
     useImperativeHandle(ref, () => ({
       focus: () => {
-        // inputRef.current?.focus();
         setIsEditStatus(true);
       },
     }));
     const onTextChange = (e: any) => {
-      console.log('e=', e.target.value);
       contentItem.text = e.target.value;
       setItemContent(index, {
         text: e.target.value,
@@ -41,28 +38,17 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
         text: contentItem.text,
         status: !contentItem.status,
       });
-      console.log(`checked = ${e.target.checked}`);
-    };
-    const startInput = () => {
-      inputRef.current?.focus();
     };
     const exitInput = () => {
       setIsEditStatus(false);
       checkIfEmpty();
-    };
-    const handleOpenChange = (open: boolean) => {
-      setOpen(open);
     };
     const deleteContent = () => {
       deleteCurItem();
       setOpen(false);
     };
     const OpenContent = () => {
-      return (
-        <>
-          <a onClick={deleteContent}>删除</a>
-        </>
-      );
+      return <a onClick={deleteContent}>删除</a>;
     };
     return (
       <div style={style} className={TodoItemStyle.container}>
@@ -87,7 +73,7 @@ const TodoItem: React.FC<TodoItemProps> = forwardRef(
             trigger="contextMenu"
             placement="top"
             open={open}
-            onOpenChange={handleOpenChange}
+            onOpenChange={(open) => setOpen(open)}
           >
             <label onClick={() => setIsEditStatus(true)} style={{ marginLeft: '12px', lineHeight: '51px' }}>
               {contentItem.text}

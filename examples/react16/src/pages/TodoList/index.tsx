@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CategoryItem from './components/CategoryItem';
 import TodoContent from './components/TodoContent';
 import { message } from 'antd';
+import { deepMerge } from '../../utils';
 
 const containerStyle = {
   display: 'flex',
@@ -24,7 +25,7 @@ const TodoList = () => {
   >([]);
 
   const [contentKey, setContentKey] = React.useState<string>(defaultKey);
-  const [selectedKeys, setSelectedKeys] = useState(defaultKey);
+  // const [selectedKeys, setSelectedKeys] = useState(defaultKey);
   const [LabelKeyList, setLabelKeyList] = useState(
     JSON.parse(localStorage.getItem(uniqueKey) || '{}')?.[labelKey as any] || [],
   );
@@ -40,23 +41,30 @@ const TodoList = () => {
     // setContent(content || []);
   }, [contentKey]);
   useEffect(() => {
-    let newContent = JSON.parse(localStorage.getItem(uniqueKey) || '{}');
-    newContent[contentKey] = localContent;
-    localStorage.setItem(uniqueKey, JSON.stringify(newContent));
+    reWriteLocalData(contentKey, localContent);
+    // let newContent = JSON.parse(localStorage.getItem(uniqueKey) || '{}');
+    // newContent[contentKey] = localContent;
+    // localStorage.setItem(uniqueKey, JSON.stringify(newContent));
   }, [localContent]);
   const saveLabelKeyList = (arr: any) => {
+    reWriteLocalData(labelKey, arr);
+    // let newContent = JSON.parse(localStorage.getItem(uniqueKey) || '{}');
+    // newContent[labelKey] = arr;
+    // localStorage.setItem(uniqueKey, JSON.stringify(newContent));
+  };
+  const reWriteLocalData = (key: string, data: any) => {
     let newContent = JSON.parse(localStorage.getItem(uniqueKey) || '{}');
-    newContent[labelKey] = arr;
+    newContent[key] = data;
     localStorage.setItem(uniqueKey, JSON.stringify(newContent));
   };
   const importData = (str: string) => {
-    console.log('sfdsaf=', str);
-    localStorage.setItem(uniqueKey, str);
-
     const uniqueData = localStorage.getItem(uniqueKey);
     const contentData = JSON.parse(uniqueData || '{}');
-    console.log('object', uniqueData, contentData);
-    setContent(contentData[contentKey] || []);
+
+    const newContent: any = deepMerge(contentData, JSON.parse(str));
+    localStorage.setItem(uniqueKey, JSON.stringify(newContent));
+    // console.log('object', uniqueData, contentData);
+    setContent(newContent[contentKey] || []);
   };
   const downLoadLocal = () => {
     // 将变量序列化为JSON字符串
@@ -88,7 +96,7 @@ const TodoList = () => {
       console.log('labelKey1', newContent);
       localStorage.setItem(uniqueKey, JSON.stringify(newContent));
       setContentKey(defaultKey);
-      setSelectedKeys(defaultKey);
+      // setSelectedKeys(defaultKey);
       setLabelKeyList(newContent[labelKey]);
     }
   };
@@ -96,7 +104,7 @@ const TodoList = () => {
     <div style={containerStyle}>
       <CategoryItem
         style={{ width: '200px', borderRight: '3px solid #eee', height: '100%' }}
-        selectedKeys={selectedKeys}
+        selectedKeys={contentKey}
         setContentKey={setContentKey}
         LabelKeyList={LabelKeyList}
         saveLabelKeyList={saveLabelKeyList}
