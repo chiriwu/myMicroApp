@@ -21,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "@microsoft/fetch-event-source": "^2.0.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "antd": "^5.9.0",

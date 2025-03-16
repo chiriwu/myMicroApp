@@ -20,7 +20,7 @@ const menu = [
     key: '/DeepSeek',
     icon: 'appstore',
     auth: [1],
-    subs: [{ title: '聊天', key: '/public/todo-list', icon: '' }],
+    subs: [{ title: '聊天', key: '/deepSeek/chat', icon: '' }],
   },
 ];
 

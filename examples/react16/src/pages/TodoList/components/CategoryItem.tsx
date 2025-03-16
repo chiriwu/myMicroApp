@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { AppstoreOutlined, MailOutlined, DownloadOutlined, DeleteOutlined, UploadOutlined } from '@ant-design/icons';
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  DownloadOutlined,
+  DeleteOutlined,
+  UploadOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
 import type { MenuProps, UploadProps } from 'antd';
 import { Menu, Button, Modal, Input, message, Tooltip, Popconfirm, Upload } from 'antd';
+import CategoryStyle from '../style/CategoryItem.module.scss';
 type MenuItem = Required<MenuProps>['items'][number];
-
+console.log('CategoryStyle=', CategoryStyle);
+console.log('sdfsf=', CategoryStyle['operation-btn']);
 const initItems: MenuItem[] = [
   {
     key: 'sub1',
@@ -90,36 +99,22 @@ const CategoryItem: React.FC<categoryItemType> = ({
         openKeys={openKey}
         onOpenChange={(key) => setOpenKey(key)}
       />
-      <div style={{ marginTop: '16px', textAlign: 'left', fontSize: '28px' }}>
-        <Button
-          type="primary"
-          style={{ fontSize: '22px', height: 'auto' }}
-          onClick={() => {
-            setModalOpen(true);
-            setProjectName('');
-          }}
-        >
-          新增项目
-        </Button>
-      </div>
-      <div
-        style={{
-          textAlign: 'left',
-          fontSize: '28px',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          backgroundColor: '#eee',
-          padding: '12px',
-          borderRadius: '8px',
-        }}
-      >
+      <div className={CategoryStyle['operation-btn']}>
+        <Tooltip title="新增项目">
+          <PlusOutlined
+            onClick={() => {
+              setModalOpen(true);
+              setProjectName('');
+            }}
+          />
+        </Tooltip>
+
         <Tooltip title="下载到本地">
           <DownloadOutlined onClick={downLoadLocal} />
         </Tooltip>
         <Tooltip title="上传到云端">
           <Upload {...importUploadProps}>
-            <UploadOutlined style={{ fontSize: '28px' }} />
+            <UploadOutlined style={{ fontSize: '28px', color: 'white' }} />
           </Upload>
         </Tooltip>
         <Tooltip title="删除项目">

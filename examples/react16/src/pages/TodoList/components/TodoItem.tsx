@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef, useState, useRef, HTMLElementType, useImperativeHandle } from 'react';
+import React, { useEffect, forwardRef, useState, useRef, useImperativeHandle } from 'react';
 import { Checkbox, Popover, Input } from 'antd';
 import type { CheckboxProps } from 'antd';
 import TodoItemStyle from '../style/TodoItem.module.scss';

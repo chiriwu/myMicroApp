@@ -2,7 +2,7 @@ import axios from 'axios';
 
 var request = axios.create({
   // 后台接口的基准地址
-  baseURL: 'http://127.0.0.1:3000/netDisk/',
+  baseURL: 'https://127.0.0.1:3000',
   timeout: 5000,
 });
 
