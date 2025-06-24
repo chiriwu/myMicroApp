@@ -42,6 +42,7 @@ export default {
   computed: {
     menuItems() {
       const routes = this.$router.options.routes;
+      this.$store.commit('getRoleId');
       const roleId = this.$store.state.roleId;
       const isMobile = checkMobile();
       return routes

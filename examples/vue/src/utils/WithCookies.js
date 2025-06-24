@@ -2,9 +2,10 @@ import Cookies from 'js-cookie';
 // var Cookies = require('js-cookie')
 
 // 还得使用js判断是否使用jwt、数据库保存用户登录数据
-console.log('cookies', Cookies);
+console.log('cookies', Cookies.get('token'));
 export const setCookies = function () {
-  return Cookies.set('token', 'thisisRandomNumberYouNeedChangeLater');
+  const token = 'thisisRandomNumberYouNeedChangeLater';
+  return Cookies.set('token', token, { expires: 7, path: '' });
 };
 
 export const getCookies = function () {

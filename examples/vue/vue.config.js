@@ -2,6 +2,7 @@ const path = require('path');
 const { name } = require('./package');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -88,6 +89,7 @@ module.exports = {
       new MonacoWebpackPlugin({
         languages: [], // ts.work.js过大，去除ts语言，
       }),
+      new BundleAnalyzerPlugin(),
     ],
     module: {
       // rules: [

@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { ROLE_LIST } from '@/constant';
 export default {
   data() {
     return {
@@ -25,8 +26,7 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      const roleId = 1; // 设置角色Id
-      await this.$store.dispatch('setCookies', roleId);
+      await this.$store.dispatch('setCookies', ROLE_LIST.NORMAL);
       this.$router.push({ path: '/home' });
       // 处理登录逻辑
       // console.log('用户名：', this.username);
