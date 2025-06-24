@@ -8,8 +8,6 @@ let player = null;
 export default function () {
   const [musicUrl, setMusicUrl] = useState(null);
   const ChangeMusic = function () {
-    console.log('player=', player);
-    console.log('musiculr=', musicUrl);
     if (player) {
       player.src = musicUrl;
       player.url = musicUrl;

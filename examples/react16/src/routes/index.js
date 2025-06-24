@@ -1,4 +1,5 @@
-import loadable from '../utils/loadable';
+// import loadable from '../utils/loadable';
+import loadable from '@loadable/component';
 
 const Index = loadable(() => import(/* webpackChunkName: 'index' */ '../pages/Media/index'));
 

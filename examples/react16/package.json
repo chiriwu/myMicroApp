@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "rescripts build",
-    "eject": "rescripts eject",
-    "start": "rescripts start",
-    "test": "rescripts test"
+    "build": "tsc -b && vite build",
+    "dev": "vite",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "browserslist": {
     "production": [
@@ -21,20 +21,25 @@
     ]
   },
   "dependencies": {
+    "@loadable/component": "^5.16.4",
     "@microsoft/fetch-event-source": "^2.0.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
     "antd": "^5.9.0",
     "axios": "^1.5.0",
     "nprogress": "^0.2.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "18.2.0",
+    "react-dom": "^18.2.0",
     "react-loadable": "^5.5.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "redux": "^5.0.1",
-    "sass": "1.32",
+    "sass": "^1.86.0",
     "sass-loader": "^10.0.5",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0",
     "xgplayer": "3.0.11",
     "xgplayer-flv": "^3.0.11",
     "xgplayer-hls": "^3.0.11",

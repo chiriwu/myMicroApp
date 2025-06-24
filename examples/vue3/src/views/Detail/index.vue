@@ -60,7 +60,7 @@ const isPanLink = (link) => {
 const getCombinePanLink = (item, k, v) => {
   const len = item.length;
   if (!v?.includes('pwd=') && k <= len - 1) {
-    return v + '&pwd=' + item[k + 1];
+    return v + '&pwd=' + item[k + 1].trim().slice(-4);
   }
   return v;
 };

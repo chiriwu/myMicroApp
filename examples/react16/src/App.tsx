@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
-import loadable from './utils/loadable';
+// import loadable from './utils/loadable';
+import loadable from '@loadable/component';
+
 import './App.css';
 
 // 公共模块
